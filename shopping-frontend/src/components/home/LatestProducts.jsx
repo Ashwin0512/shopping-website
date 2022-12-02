@@ -8,8 +8,8 @@ const newArrivals = [
         productName : "Chanel Perfume",
         productBrand: 'Chanel',
         productMrp: 650,
-        productID: 1
-    }
+        productID: 3254234
+    },
 ]
 const bestSellers = [
     {
@@ -17,7 +17,7 @@ const bestSellers = [
         productName: 'Nivea Hand Cream',
         productBrand: 'Nivea',
         productMrp: 220,
-        productID: 2
+        productID: 425234432
     }
 ]
 const featured = [
@@ -26,7 +26,7 @@ const featured = [
         productName: 'Sting Energy Drink',
         productBrand: 'PepsiCo',
         productMrp: 40,
-        productID: 3
+        productID: 4564356546
     }
 ]
 const specialOffer = [
@@ -35,7 +35,7 @@ const specialOffer = [
         productName: 'Dairy Milk Bites Hazlenut',
         productBrand: 'Cadbury',
         productMrp: 69,
-        productID: 4
+        productID: 56865745
     }
 ]
 
@@ -58,6 +58,7 @@ export default function LatestProducts() {
                                             img={product.img} 
                                             brand ={product.productBrand}
                                             mrp={product.productMrp }
+                                            id = {product.productID}
                                             key= {product.productID}
                                            />
             )}

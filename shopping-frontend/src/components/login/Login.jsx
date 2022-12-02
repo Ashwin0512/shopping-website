@@ -1,12 +1,19 @@
 import * as React from 'react';
-import { Avatar,Button,CssBaseline,TextField,FormControlLabel,Checkbox, Link, Grid, Box, Typography, Container } from '@mui/material';
+import { Avatar,Button,CssBaseline,TextField,FormControlLabel,Checkbox, Grid, Link, Box, Typography, Container } from '@mui/material';
+import { useNavigate } from "react-router-dom";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-// import Image from '../../util/images/login-bg.jpeg'
 
 const theme = createTheme();
 
 export default function Login() {
+
+  const navigate = useNavigate()
+  const routeChange = () => {
+    const path = "home"
+    navigate(path)
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currenta);
@@ -66,14 +73,17 @@ export default function Login() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={() => {routeChange()}}
             >
               Sign In
             </Button>
+            
             <Box sx={{display:'flex', justifyContent:'space-between', mb:2}}>
             <Button 
               variant='outlined'

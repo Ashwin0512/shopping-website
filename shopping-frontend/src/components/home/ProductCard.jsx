@@ -7,12 +7,20 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
-
+import { useNavigate } from "react-router-dom";
+ 
 export default function ProductCard (props) {
 
     const [inWishlist, setInWishlist] = useState(false)
     const [inCart, setInCart] = useState(false)
     const [quantity, setQuantity] = useState(0)
+
+    const navigate = useNavigate()
+    const routeChange = () => {
+      const path = "../product/" + props.id.toString()
+      console.log(props.id)
+      navigate(path)
+    }
 
     function handleAddToWishlist() {
         if(inWishlist)
@@ -58,7 +66,10 @@ export default function ProductCard (props) {
                         {inWishlist ? <FavoriteIcon/>:<FavoriteBorderIcon/>}
                     </Box>
                     <Box>
-                        <ReadMoreIcon/>
+                        <ReadMoreIcon onClick={() => {
+                            console.log("Route change")
+                            routeChange()
+                        }}/>
                     </Box>
                 </Box>
                 <Typography>{props.brand}</Typography>
