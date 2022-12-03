@@ -1,9 +1,10 @@
 import { Add, Remove } from "@material-ui/icons";
+import { useState } from "react";
 import styled from "styled-components";
-import Announcement from "../components/Announcement";
+// import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import Newsletter from "../components/Newsletter";
+// import Newsletter from "../components/Newsletter";
 import { mobile } from "../responsive";
 
 const Container = styled.div``;
@@ -116,10 +117,13 @@ const Button = styled.button`
 `;
 
 const Product = () => {
+
+  const [quantity, setQuantity] = useState(1)
+
   return (
     <Container>
       <Navbar />
-      <Announcement />
+      {/* <Announcement /> */}
       <Wrapper>
         <ImgContainer>
           <Image src="https://i.ibb.co/S6qMxwr/jean.jpg" />
@@ -134,7 +138,7 @@ const Product = () => {
             condimentum ac, volutpat ornare.
           </Desc>
           <Price>$ 20</Price>
-          <FilterContainer>
+          {/* <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
               <FilterColor color="black" />
@@ -151,18 +155,21 @@ const Product = () => {
                 <FilterSizeOption>XL</FilterSizeOption>
               </FilterSize>
             </Filter>
-          </FilterContainer>
+          </FilterContainer> */}
           <AddContainer>
             <AmountContainer>
-              <Remove />
-              <Amount>1</Amount>
-              <Add />
+              <Remove onClick={() => {
+                if(quantity>1)
+                setQuantity(quantity-1)
+              }} />
+              <Amount>{quantity}</Amount>
+              <Add onClick={() => {setQuantity(quantity+1)}} />
             </AmountContainer>
             <Button>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
-      <Newsletter />
+      {/* <Newsletter /> */}
       <Footer />
     </Container>
   );
