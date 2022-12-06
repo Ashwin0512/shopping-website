@@ -1,5 +1,6 @@
+import { useState,useEffect } from "react";
+import axios from "axios";
 import styled from "styled-components";
-import { popularProducts } from "../data";
 import Product from "./Product";
 
 const Container = styled.div`
@@ -10,10 +11,23 @@ const Container = styled.div`
 `;
 
 const Products = () => {
+
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+      loadProducts();
+  },[])
+
+  const loadProducts = async () => {
+      const res = await axios.get("http://localhost:8080/products")
+      console.log(res)
+      setProducts(res.data)
+  }
+
   return (
     <Container>
-      {popularProducts.map((item) => (
-        <Product item={item} key={item.id} />
+      {products.map((item) => (
+        <Product item={item} key={item.product_id}/>
       ))}
     </Container>
   );
