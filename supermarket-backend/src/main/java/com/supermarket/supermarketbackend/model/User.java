@@ -1,42 +1,82 @@
 package com.supermarket.supermarketbackend.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.util.UUID;
 
 @Entity
 @Table
 public class User {
-
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
-    @Column
-    private String name;
+    @GeneratedValue
+    private UUID user_id;
+    private String user_name;
+    private StringBuffer user_password;
+    private String user_address;
+    private String user_phone;
+    private String user_email;
 
-    public UUID getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
+    public UUID getUser_id() {
+        return user_id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUser_id(UUID user_id) {
+        this.user_id = user_id;
     }
 
-    public User(@JsonProperty("id") UUID id, @JsonProperty("name") String name) {
-        this.id = id;
-        this.name = name;
+    public String getUser_name() {
+        return user_name;
     }
-    public User() {
-        this.id = null;
-        this.name = null;
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
     }
+
+    public StringBuffer getUser_password() {
+        return user_password;
+    }
+
+    public void setUser_password(StringBuffer user_password) {
+        this.user_password = user_password;
+    }
+
+    public String getUser_address() {
+        return user_address;
+    }
+
+    public void setUser_address(String user_address) {
+        this.user_address = user_address;
+    }
+
+    public String getUser_phone() {
+        return user_phone;
+    }
+
+    public void setUser_phone(String user_phone) {
+        this.user_phone = user_phone;
+    }
+
+    public String getUser_email() {
+        return user_email;
+    }
+
+    public void setUser_email(String user_email) {
+        this.user_email = user_email;
+    }
+
+//    public User(UUID user_id, String user_name, StringBuffer user_password, String user_address, String user_phone, String user_email) {
+//        this.user_id = user_id;
+//        this.user_name = user_name;
+//        this.user_password = user_password;
+//        this.user_address = user_address;
+//        this.user_phone = user_phone;
+//        this.user_email = user_email;
+//    }
+//
+//    public User() {
+//
+//    }
 }
