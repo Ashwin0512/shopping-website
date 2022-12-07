@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import { categories } from "../data";
+// import { categories } from "../data";
 import { mobile } from "../responsive";
 import CategoryItem from "./CategoryItem";
+import axios from "axios";
+import { useState } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -12,6 +14,11 @@ const Container = styled.div`
 `;
 
 const Categories = () => {
+
+  const [categories, setCategories] = useState([])
+
+  
+
   return (
     <Container>
       {categories.map((item) => (
