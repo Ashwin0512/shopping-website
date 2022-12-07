@@ -16,9 +16,11 @@ export default function AddProduct () {
         days_to_deliver:''
     })
 
-    const {product_name,price,desc,category,discount,product_url,days_to_deliver} = product
+    const {product_name,price,desc,discount,product_url,days_to_deliver} = product
 
     const onInputChange = (e) =>  {
+        console.log(e.target.name)
+        console.log(e.target)
         setProduct({
             ...product,
             [e.target.name] : e.target.value
@@ -70,13 +72,36 @@ export default function AddProduct () {
                 />
 
                 <label style={{marginTop:'2rem'}}>Category</label>
-                <input 
-                    style={{width:'30vw'}} 
-                    type='text'
+                <div>
+                    <input 
+                        type="radio" 
+                        value="Daily Essentials" 
+                        name="category" 
+                        onChange={(e) => onInputChange(e)}
+                        // checked={this.state.selectedOption = "Daily Essentials"}
+                    /> Daily Essentials
+                    <input 
+                        type="radio" 
+                        value="Fruits and Vegetables" 
+                        name="category" 
+                        onChange={(e) => onInputChange(e)}
+                        // checked={this.state.selectedOption = "Fruits and Vegetables"}
+                    /> Fruits and Vegetables
+                    <input 
+                        type="radio" 
+                        value="Beverages" 
+                        name="category"
+                        onChange={(e) => onInputChange(e)}
+                        // checked={this.state.selectedOption = "Beverages"}
+                    /> Beverages
+                </div>
+                {/* <input 
+                    style={{width:'30vw'}}
+                    type='radio'
                     value={category}
                     name='category'
                     onChange={(e) => onInputChange(e)}
-                />
+                /> */}
 
                 <label style={{marginTop:'2rem'}}>Discount</label>
                 <input 

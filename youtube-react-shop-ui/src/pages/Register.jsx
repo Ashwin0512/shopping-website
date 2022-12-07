@@ -1,3 +1,6 @@
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 
@@ -55,22 +58,85 @@ const Button = styled.button`
 `;
 
 const Register = () => {
+
+  let navigate = useNavigate()
+
+  const [user, setUser] = useState({
+    user_address: '',
+    user_email: '',
+    user_name: '',
+    user_phone: '',
+    user_password: '',
+    user_cnf_password: ''
+  })
+
+  const {user_address, user_email, user_name, user_password, user_phone, user_cnf_password} = user
+
+  const onInputChange = (e) =>  {
+    setUser({
+        ...user,
+        [e.target.name] : e.target.value
+    })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await axios.post("http://localhost:8080/add/user", user)
+    navigate("/login")
+  }
+
   return (
     <Container>
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
-        <Form>
-          <Input placeholder="name" />
-          <Input placeholder="last name" />
-          <Input placeholder="username" />
-          <Input placeholder="email" />
-          <Input placeholder="password" />
-          <Input placeholder="confirm password" />
+        <Form onSubmit={(e) => handleSubmit(e)}>
+          <Input 
+            placeholder="Name"
+            type="text"
+            value={user_name}
+            name='user_name'
+            onChange={(e) => onInputChange(e)}
+          />
+          <Input 
+            placeholder="Email" 
+            type="email"
+            value={user_email}
+            name='user_email'
+            onChange={(e) => onInputChange(e)}
+          />
+          <Input 
+            placeholder="Phone"
+            type="phone"
+            value={user_phone}
+            name='user_phone'
+            onChange={(e) => onInputChange(e)}
+           />
+          <Input 
+            placeholder="Address" 
+            type="text"
+            value={user_address}
+            name='user_address'
+            onChange={(e) => onInputChange(e)}
+          />
+          <Input 
+            placeholder="Password"
+            type="password"
+            value={user_password}
+            name='user_password'
+            onChange={(e) => onInputChange(e)}
+          />
+          <Input 
+            placeholder="Confirm Password" 
+            type="password"
+            value={user_cnf_password}
+            name='user_cnf_password'
+            onChange={(e) => onInputChange(e)}
+          />
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button>CREATE</Button>
+          <Button type="submit">CREATE</Button>
         </Form>
       </Wrapper>
     </Container>

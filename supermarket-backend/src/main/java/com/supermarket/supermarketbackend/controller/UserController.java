@@ -22,4 +22,9 @@ public class UserController {
     List<User> getAllUsers() {
         return userRepository.findAll();
     }
+
+    @GetMapping("user/byEmail/{email}")
+    User getByEmail(@PathVariable("email") String email) {
+        return userRepository.findByEmail(email);
+    }
 }

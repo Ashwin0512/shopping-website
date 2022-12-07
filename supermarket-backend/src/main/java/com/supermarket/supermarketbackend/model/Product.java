@@ -2,11 +2,13 @@ package com.supermarket.supermarketbackend.model;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 public class Product {
     @Id
     @GeneratedValue
-    private Long product_id;
+    private UUID product_id;
     private String category;
     private String product_name;
     @Lob
@@ -25,11 +27,11 @@ public class Product {
         this.desc = desc;
     }
 
-    public Long getProduct_id() {
+    public UUID getProduct_id() {
         return product_id;
     }
 
-    public void setProduct_id(Long product_id) {
+    public void setProduct_id(UUID product_id) {
         this.product_id = product_id;
     }
 
@@ -79,5 +81,20 @@ public class Product {
 
     public void setDays_to_deliver(int days_to_deliver) {
         this.days_to_deliver = days_to_deliver;
+    }
+
+    public Product(UUID product_id, String category, String product_name, String desc, double price, double discount, String product_url, int days_to_deliver) {
+        this.product_id = product_id;
+        this.category = category;
+        this.product_name = product_name;
+        this.desc = desc;
+        this.price = price;
+        this.discount = discount;
+        this.product_url = product_url;
+        this.days_to_deliver = days_to_deliver;
+    }
+
+    public Product() {
+
     }
 }

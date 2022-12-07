@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import {mobile} from "../responsive";
 
@@ -58,14 +59,45 @@ const Link = styled.a`
 `;
 
 const Login = () => {
+
+  const [userCreds, setUserCreds] = useState({
+    email: '',
+    password: ''
+  })
+
+  const handleChange = (e) => {
+    setUserCreds({
+      ...userCreds,
+      [e.target.name] : e.target.value
+    })
+  } 
+
+  const handleSubmit = (e) => {
+
+  }
+
+  const {email, password} = userCreds
+
   return (
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>
-        <Form>
-          <Input placeholder="Email" />
-          <Input placeholder="Password" />
-          <Button>LOGIN</Button>
+        <Form onSubmit={(e) => handleSubmit(e)}>
+          <Input 
+            placeholder="Email"
+            type="email"
+            name="email"
+            value={email}
+            onChange={(e) => handleChange(e)}
+          />
+          <Input 
+            placeholder="Password" 
+            type="password"
+            name="password"
+            value={password}
+            onChange={(e) => handleChange(e)}
+          />
+          <Button type="submit">LOGIN</Button>
           <Link>FORGOT PASSWORD?</Link>
           <Link>CREATE A NEW ACCOUNT</Link>
         </Form>

@@ -22,4 +22,9 @@ public class ProductController {
     List<Product> getAllProducts() {
         return productRepository.findAll();
     }
+
+    @GetMapping("/products/{category}")
+    List<Product> getProductsByCategory(@PathVariable("category") String category) {
+        return productRepository.findProductsByCategory(category);
+    }
  }

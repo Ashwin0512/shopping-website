@@ -1,9 +1,6 @@
 package com.supermarket.supermarketbackend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
@@ -17,6 +14,7 @@ public class User {
     private StringBuffer user_password;
     private String user_address;
     private String user_phone;
+    @Column(unique = true)
     private String user_email;
 
     public UUID getUser_id() {
@@ -67,16 +65,16 @@ public class User {
         this.user_email = user_email;
     }
 
-//    public User(UUID user_id, String user_name, StringBuffer user_password, String user_address, String user_phone, String user_email) {
-//        this.user_id = user_id;
-//        this.user_name = user_name;
-//        this.user_password = user_password;
-//        this.user_address = user_address;
-//        this.user_phone = user_phone;
-//        this.user_email = user_email;
-//    }
-//
-//    public User() {
-//
-//    }
+    public User(UUID user_id, String user_name, StringBuffer user_password, String user_address, String user_phone, String user_email) {
+        this.user_id = user_id;
+        this.user_name = user_name;
+        this.user_password = user_password;
+        this.user_address = user_address;
+        this.user_phone = user_phone;
+        this.user_email = user_email;
+    }
+
+    public User() {
+
+    }
 }

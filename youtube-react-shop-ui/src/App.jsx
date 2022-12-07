@@ -7,6 +7,7 @@ import Cart from "./pages/Cart";
 import Error from "./pages/Error";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddProduct from "./pages/AddProduct";
+import ManagerHome from "./pages/ManagerHome";
 
 const App = () => {
   return(
@@ -18,7 +19,11 @@ const App = () => {
           <Route path='/cart' element={<Cart />} />
           <Route path='/products' element={<ProductList />} />
           <Route path='/product/:product_id' element={<Product />} />
-          <Route path='/product/add' element={<AddProduct />} />
+
+          <Route path="/manager">
+            <Route path="home" element={<ManagerHome />} />
+            <Route path='product/add' element={<AddProduct />} />
+          </Route>
           <Route path='*' element={<Error />} />
       </Routes>
     </BrowserRouter>
