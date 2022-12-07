@@ -4,6 +4,9 @@ export default function ManagerHome() {
     return (
         <div>
             <h1>Manager Home</h1>
+
+            <Link to="/manager/products/view">View Products</Link>
+            <br></br>
             <Link to="/manager/product/add">Add Product</Link>
             <br />
             <Link to="/manager/category/add">Add Category</Link>

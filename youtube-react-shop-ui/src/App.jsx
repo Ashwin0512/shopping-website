@@ -6,9 +6,9 @@ import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 import Error from "./pages/Error";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AddProduct from "./pages/AddProduct";
-import ManagerHome from "./pages/ManagerHome";
-import AddCategory from "./pages/AddCategory";
+import AddProduct from "./pages/manager/AddProduct";
+import ManagerHome from "./pages/manager/ManagerHome";
+import AddCategory from "./pages/manager/AddCategory";
 
 const App = () => {
   return(
