@@ -8,6 +8,7 @@ import Error from "./pages/Error";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddProduct from "./pages/AddProduct";
 import ManagerHome from "./pages/ManagerHome";
+import AddCategory from "./pages/AddCategory";
 
 const App = () => {
   return(
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/manager">
             <Route path="home" element={<ManagerHome />} />
             <Route path='product/add' element={<AddProduct />} />
+            <Route path='category/add' element={<AddCategory />}/>
           </Route>
           <Route path='*' element={<Error />} />
       </Routes>

@@ -1,9 +1,8 @@
 import axios from "axios"
-import { useEffect } from "react"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-export default function AddProduct () {
+export default function AddCategory () {
 
     let navigate = useNavigate()
 
@@ -17,18 +16,7 @@ export default function AddProduct () {
         days_to_deliver:''
     })
 
-    const {product_name,price,desc,discount,product_url,days_to_deliver} = product
-
-    const [categories, setCategories] = useState([])
-
-    useEffect(() => {
-        loadCategories()
-    },[])
-
-    const loadCategories = async () => {
-        const res = await axios.get("http://localhost:8080/categories")
-        setCategories(res.data)
-    }
+    const {product_name,price,desc,category,discount,product_url,days_to_deliver} = product
 
     const onInputChange = (e) =>  {
         setProduct({
@@ -82,23 +70,14 @@ export default function AddProduct () {
                 />
 
                 <label style={{marginTop:'2rem'}}>Category</label>
-                <div>
-                    {
-                        categories.map(category => {
-                            return(
-                                <>
-                                <input 
-                                    type="radio" 
-                                    value={category} 
-                                    name="category" 
-                                    onChange={(e) => onInputChange(e)}
-                                />
-                                <label>{category}</label>
-                                </>
-                            )
-                        })
-                    }
-                </div>
+                <input 
+                    style={{width:'30vw'}} 
+                    type='text'
+                    value={category}
+                    name='category'
+                    onChange={(e) => onInputChange(e)}
+                />
+
                 <label style={{marginTop:'2rem'}}>Discount</label>
                 <input 
                     style={{width:'30vw'}} 
