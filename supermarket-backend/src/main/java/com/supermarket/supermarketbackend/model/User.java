@@ -11,7 +11,7 @@ public class User {
     @GeneratedValue
     private UUID user_id;
     private String user_name;
-    private StringBuffer user_password;
+    private String user_password;
     private String user_address;
     private String user_phone;
     @Column(unique = true)
@@ -33,11 +33,11 @@ public class User {
         this.user_name = user_name;
     }
 
-    public StringBuffer getUser_password() {
+    public String getUser_password() {
         return user_password;
     }
 
-    public void setUser_password(StringBuffer user_password) {
+    public void setUser_password(String user_password) {
         this.user_password = user_password;
     }
 
@@ -65,7 +65,7 @@ public class User {
         this.user_email = user_email;
     }
 
-    public User(UUID user_id, String user_name, StringBuffer user_password, String user_address, String user_phone, String user_email) {
+    public User(UUID user_id, String user_name, String user_password, String user_address, String user_phone, String user_email) {
         this.user_id = user_id;
         this.user_name = user_name;
         this.user_password = user_password;

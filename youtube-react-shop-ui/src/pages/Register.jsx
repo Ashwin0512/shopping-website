@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+var bcrypt = require('bcryptjs');
 
 const Container = styled.div`
   width: 100vw;
@@ -66,11 +67,11 @@ const Register = () => {
     user_email: '',
     user_name: '',
     user_phone: '',
-    user_password: '',
     user_cnf_password: ''
   })
+  const [password, setPassword] = useState()
 
-  const {user_address, user_email, user_name, user_password, user_phone, user_cnf_password} = user
+  const {user_address, user_email, user_name, user_phone, user_cnf_password} = user
 
   const onInputChange = (e) =>  {
     setUser({
@@ -79,8 +80,21 @@ const Register = () => {
     })
   }
 
+  const onPasswordChange = (e) => {
+    setPassword(e.target.value)
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync());
+    console.log(hashedPassword)
+
+    setPassword(prev => {
+      console.log(prev)
+    })
+    console.log(password)
+
     await axios.post("http://localhost:8080/add/user", user)
     navigate("/login")
   }
@@ -121,9 +135,9 @@ const Register = () => {
           <Input 
             placeholder="Password"
             type="password"
-            value={user_password}
-            name='user_password'
-            onChange={(e) => onInputChange(e)}
+            value={password}
+            name='password'
+            onChange={(e) => onPasswordChange(e)}
           />
           <Input 
             placeholder="Confirm Password" 

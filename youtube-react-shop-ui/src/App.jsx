@@ -9,8 +9,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddProduct from "./pages/manager/AddProduct";
 import ManagerHome from "./pages/manager/ManagerHome";
 import AddCategory from "./pages/manager/AddCategory";
+import ManagerLogin from "./pages/manager/ManagerLogin";
+import AdminLogin from "./pages/admin/AdminLogin";
 
 const App = () => {
+
+  const isManagerLoggedIn = true
+  const isAdminLoggedIn = true
+
   return(
     <BrowserRouter>
       <Routes>
@@ -21,11 +27,22 @@ const App = () => {
           <Route path='/products' element={<ProductList />} />
           <Route path='/product/:product_id' element={<Product />} />
 
-          <Route path="/manager">
-            <Route path="home" element={<ManagerHome />} />
-            <Route path='product/add' element={<AddProduct />} />
-            <Route path='category/add' element={<AddCategory />}/>
-          </Route>
+          {isManagerLoggedIn && 
+            <Route path="/manager">
+              <Route path="home" element={<ManagerHome />} />
+              <Route path='product/add' element={<AddProduct />} />
+              <Route path='category/add' element={<AddCategory />}/>
+              <Route path='login' element={<ManagerLogin />}/>
+            </Route>
+          }
+
+          {
+            isAdminLoggedIn &&
+            <Route path="admin">
+              <Route path="login" element={<AdminLogin />} />
+            </Route>
+          }
+          
           <Route path='*' element={<Error />} />
       </Routes>
     </BrowserRouter>

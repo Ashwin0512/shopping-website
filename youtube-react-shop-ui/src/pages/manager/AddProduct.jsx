@@ -89,11 +89,11 @@ export default function AddProduct () {
                                 <>
                                 <input 
                                     type="radio" 
-                                    value={category} 
+                                    value={category.cat_name} 
                                     name="category" 
                                     onChange={(e) => onInputChange(e)}
                                 />
-                                <label>{category}</label>
+                                <label>{category.cat_name}</label>
                                 </>
                             )
                         })

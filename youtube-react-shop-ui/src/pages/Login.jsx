@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import {mobile} from "../responsive";
+import { Link } from "@material-ui/core";
 
 const Container = styled.div`
   width: 100vw;
@@ -51,7 +52,7 @@ const Button = styled.button`
   margin-bottom: 10px;
 `;
 
-const Link = styled.a`
+const LinkTo = styled.a`
   margin: 5px 0px;
   font-size: 12px;
   text-decoration: underline;
@@ -73,7 +74,7 @@ const Login = () => {
   } 
 
   const handleSubmit = (e) => {
-
+    
   }
 
   const {email, password} = userCreds
@@ -81,6 +82,12 @@ const Login = () => {
   return (
     <Container>
       <Wrapper>
+        <Link href="http://localhost:3000/manager/login">
+          <Button style={{marginRight:'1rem'}}>Manager Login</Button>
+        </Link>
+        <Link href="http://localhost:3000/admin/login">
+          <Button>Admin Login</Button>
+        </Link>
         <Title>SIGN IN</Title>
         <Form onSubmit={(e) => handleSubmit(e)}>
           <Input 
@@ -98,8 +105,8 @@ const Login = () => {
             onChange={(e) => handleChange(e)}
           />
           <Button type="submit">LOGIN</Button>
-          <Link>FORGOT PASSWORD?</Link>
-          <Link>CREATE A NEW ACCOUNT</Link>
+          <LinkTo>FORGOT PASSWORD?</LinkTo>
+          <LinkTo>CREATE A NEW ACCOUNT</LinkTo>
         </Form>
       </Wrapper>
     </Container>

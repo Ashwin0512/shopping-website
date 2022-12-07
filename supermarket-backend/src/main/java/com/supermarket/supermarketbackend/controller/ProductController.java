@@ -23,10 +23,10 @@ public class ProductController {
         return productRepository.findAll();
     }
 
-    @GetMapping("/categories")
-    List<String> getCategories() {
-        return productRepository.getCategories();
-    }
+//    @GetMapping("/categories")
+//    List<String> getCategories() {
+//        return productRepository.getCategories();
+//    }
 
     @GetMapping("/products/{category}")
     List<Product> getProductsByCategory(@PathVariable("category") String category) {
