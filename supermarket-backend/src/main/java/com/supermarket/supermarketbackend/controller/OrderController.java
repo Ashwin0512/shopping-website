@@ -26,6 +26,11 @@ public class OrderController {
         return orderRepository.save(newOrder);
     }
 
+    @GetMapping("/order/{id}")
+    Order getOrderById(@PathVariable("id") UUID id) {
+        return orderRepository.findOrderById(id);
+    }
+
     @GetMapping("/orders/{id}")
     List<Order> getOrdersByUserId(@PathVariable("id")UUID id) {
         return orderRepository.findOrdersByUserId(id);
