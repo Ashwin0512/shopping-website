@@ -1,0 +1,28 @@
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    margin: 20px 50px;
+    border-right: 1px solid rgba(0, 0, 0, 0.127);
+    width: 150px;
+}
+
+.sidebar li{
+    list-style-type: none;
+    font-size: 16px;
+    height: 40px;
+    vertical-align: middle;
+    /* background: rgb(218, 163, 163); */
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.16); */
+}
+
+.sidelink{
+    height: 50px;
+}
+.acc{
+    width: 150px;
+    margin: 10px 50px;
+    margin-top: 50px;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.142);
+    padding-bottom: 20px;
+}

@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Announcement from "../components/Announcement";
@@ -37,24 +39,36 @@ const Select = styled.select`
 const Option = styled.option``;
 
 const ProductList = () => {
+
+  const [categories, setCategories] = useState([])
+
+  useEffect(() => {
+    loadCategories();
+  },[])
+
+  const loadCategories = async () => {
+      const res = await axios.get("http://localhost:8080/categories")
+      console.log(res.data)
+      setCategories(res.data)
+  }
+
   return (
     <Container>
       <Navbar />
       <Announcement />
-      <Title>Dresses</Title>
+      <Title>All Products</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
           <Select>
             <Option disabled selected>
-              Color
+              Category
             </Option>
-            <Option>White</Option>
-            <Option>Black</Option>
-            <Option>Red</Option>
-            <Option>Blue</Option>
-            <Option>Yellow</Option>
-            <Option>Green</Option>
+            {categories.map(category => {
+              return(
+                <Option>{category.cat_name}</Option>
+              )
+            })}
           </Select>
           <Select>
             <Option disabled selected>
@@ -77,8 +91,8 @@ const ProductList = () => {
         </Filter>
       </FilterContainer>
       <Products />
-      <Newsletter />
-      <Footer />
+      {/* <Newsletter /> */}
+      {/* <Footer /> */}
     </Container>
   );
 };

@@ -1,15 +1,12 @@
 package com.supermarket.supermarketbackend.controller;
 
 import com.supermarket.supermarketbackend.model.User;
+import com.supermarket.supermarketbackend.model.Login;
 import com.supermarket.supermarketbackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.attribute.UserPrincipalNotFoundException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,32 +17,56 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("/add/user")
-    User newUser(@RequestBody User newUser) throws NoSuchAlgorithmException {
-//        byte[] hashed_password = getSHA(newUser.getUser_password());
-//        String x = toHexString(hashed_password);
-//        newUser.setUser_password(x);
+    User newUser(@RequestBody User newUser)  {
         return  userRepository.save(newUser);
     }
 
-    public static byte[] getSHA(String input) throws NoSuchAlgorithmException
-    {
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        return md.digest(input.getBytes(StandardCharsets.UTF_8));
-    }
+//    @RequestMapping("/login")
+//    public boolean findUserByPassword(@RequestParam("email") String email, @RequestParam("password") String password) {
+//        System.out.println(email);
+//        System.out.println(password);
+//
+//        return true;
+//        if(userLogin.getUser_password() == getByEmail(userLogin.getUser_email()).getUser_password()) {
+//            System.out.println(true);
+//            return true;
+//        }
+//        return false;
+//    }
 
-    public static String toHexString(byte[] hash)
-    {
-        BigInteger number = new BigInteger(1, hash);
-
-        StringBuilder hexString = new StringBuilder(number.toString(16));
-
-        while (hexString.length() < 64)
-        {
-            hexString.insert(0, '0');
+    @PostMapping("/login")
+    boolean userLogin(@RequestBody Login newlogin) {
+        User user=getByEmail(newlogin.email);
+        if(user==null){
+            return false;
         }
-
-        return hexString.toString();
+        if(user!=null){
+            if(newlogin.password.equals(user.getUser_password())){
+                return true;
+            }
+        }
+        return false;
     }
+
+//    public static byte[] getSHA(String input) throws NoSuchAlgorithmException
+//    {
+//        MessageDigest md = MessageDigest.getInstance("SHA-256");
+//        return md.digest(input.getBytes(StandardCharsets.UTF_8));
+//    }
+//
+//    public static String toHexString(byte[] hash)
+//    {
+//        BigInteger number = new BigInteger(1, hash);
+//
+//        StringBuilder hexString = new StringBuilder(number.toString(16));
+//
+//        while (hexString.length() < 64)
+//        {
+//            hexString.insert(0, '0');
+//        }
+//
+//        return hexString.toString();
+//    }
 
     @GetMapping("/users")
     List<User> getAllUsers() {

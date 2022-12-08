@@ -1,5 +1,4 @@
-import Product from "./pages/Product";
-import Home from "./pages/Home";
+import ProductPage from "./pages/ProductPage";
 import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -12,6 +11,9 @@ import AddCategory from "./pages/manager/AddCategory";
 import ManagerLogin from "./pages/manager/ManagerLogin";
 import AdminLogin from "./pages/admin/AdminLogin";
 import ForgotPasseord from "./pages/ForgotPassword";
+import HomeRaju from "./pages/HomeRaju";
+import CategoryPage from "./pages/CategoryPage";
+import Profile from "./pages/Profile";
 
 const App = () => {
 
@@ -21,13 +23,15 @@ const App = () => {
   return(
     <BrowserRouter>
       <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomeRaju />} />
           <Route path='/login' element={<Login />} />
           <Route path='/forgotPassword' element={<ForgotPasseord />} />
           <Route path='/register' element={<Register />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/products' element={<ProductList />} />
-          <Route path='/product/:product_id' element={<Product />} />
+          <Route path='/product/:product_id' element={<ProductPage />} />
+          <Route path='/categories/:category_name' element={<CategoryPage />} />
+          <Route path='/profile/:user_id' element={<Profile />} />
 
           {isManagerLoggedIn && 
             <Route path="/manager">

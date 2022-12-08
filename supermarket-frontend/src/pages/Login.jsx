@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import {mobile} from "../responsive";
 import { Link } from "@material-ui/core";
+import axios from "axios";
 
 const Container = styled.div`
   width: 100vw;
@@ -73,8 +74,10 @@ const Login = () => {
     })
   } 
 
-  const handleSubmit = (e) => {
-    
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    await axios.post(`http://localhost:8080/login`)
+    console.log();
   }
 
   const {email, password} = userCreds
@@ -104,10 +107,10 @@ const Login = () => {
 
           <div style={{display:'flex', justifyContent:'space-between'}}>
             <Link href="http://localhost:3000/manager/login">
-            <Button>Manager Login</Button>
+            <Button>Login as Manager</Button>
             </Link>
             <Link href="http://localhost:3000/admin/login">
-              <Button>Admin Login</Button>
+              <Button>Login as Admin</Button>
             </Link>
           </div>
         </Form>

@@ -1,0 +1,25 @@
+.profilecard h1{
+    margin: 20px auto;
+    font-size: 25px;
+}
+
+.profilecard form{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.profilecard input{
+    width: 500px;
+    margin: 10px auto;
+    padding: 5px 10px;
+}
+
+.profilecard button {
+    width: 150px;
+    margin: 10px auto;
+    padding: 10px 0;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(76, 183, 254);
+}

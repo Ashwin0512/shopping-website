@@ -1,0 +1,32 @@
+.card1{
+    height:300px; 
+    margin:30px 40px; 
+    width:230px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    border-radius: 10px;
+    border: none;
+    text-transform: uppercase;
+    position: relative;
+    cursor: pointer;
+}
+
+.card1::before{
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    filter: blur(1px);
+}
+
+.text{
+    color: white;
+    position: relative;
+    font-size: 22px;
+}
