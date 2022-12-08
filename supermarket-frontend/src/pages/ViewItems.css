@@ -1,0 +1,60 @@
+.viewtiemsmain{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 30px auto;
+}
+
+.productimg{
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    margin: auto 15px;
+}
+
+.productcards{
+    height: 25vh;
+    margin: 10px auto;
+    width: 700px; 
+    text-align: left;
+    /* background-color: rgb(92, 195, 255); */
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.185);
+    display: flex;
+    border-radius: 10px;
+    justify-content: space-between;
+}
+
+.productcards p{
+    margin: auto 5px;
+
+}
+
+.ppart1{
+    margin: 10px 15px;
+    margin-left: -90px;
+}
+
+
+.ppart2{
+    margin: 10px 30px;
+}
+
+.editbutton{
+    width: 150px;
+    margin: 10px auto;
+    padding: 10px 0;
+    border: none;
+    border-radius: 12px;
+    background-color: rgb(76, 183, 254);
+}
+
+.deletebutton{
+    width: 150px;
+    margin: 10px auto;
+    padding: 10px 0;
+    border: none;
+    border-radius: 12px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid red;
+    color:red;
+}

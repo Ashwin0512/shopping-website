@@ -2,7 +2,8 @@ import axios from "axios"
 import { useEffect } from "react"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-
+import Navbar from "../components/Navbar"
+import SideBar_manager from "../components/SideBar_manager"
 export default function AddProduct () {
 
     let navigate = useNavigate()
@@ -48,11 +49,17 @@ export default function AddProduct () {
     }
 
     return (
+        <>
+        <Navbar />
+        <div style={{ display: "flex" }}>
+        <SideBar_manager/>
+
+        <div className='profilecard'> 
         <div>
-            <h1>ADD PRODUCT</h1>
+            <h1>Add New Product</h1>
 
             <form onSubmit={(e) => handleSubmit(e)}>
-            <div style={{display:'flex', flexDirection:'column'}}>
+            <div style={{display:'flex', flexDirection:'column', margin:'-10px auto'}}>
                 
                 <label style={{marginTop:'2rem'}}>Name</label>
                 <input 
@@ -61,6 +68,7 @@ export default function AddProduct () {
                     value={product_name}
                     name='product_name'
                     onChange={(e) => onInputChange(e)}
+                    placeholder='Enter product name'
                 />
 
                 <label style={{marginTop:'2rem'}}>Price</label>
@@ -70,6 +78,8 @@ export default function AddProduct () {
                     value={price}
                     name='price'
                     onChange={(e) => onInputChange(e)}
+                    placeholder='Enter product price'
+
                 />
 
                 <label style={{marginTop:'2rem'}}>Description</label>
@@ -79,6 +89,8 @@ export default function AddProduct () {
                     value={desc}
                     name='desc'
                     onChange={(e) => onInputChange(e)}
+                    placeholder='Enter product description'
+
                 />
 
                 <label style={{marginTop:'2rem'}}>Category</label>
@@ -92,6 +104,7 @@ export default function AddProduct () {
                                     value={category.cat_name} 
                                     name="category" 
                                     onChange={(e) => onInputChange(e)}
+                                    style={{margin: '12px 10px', paddingTop:'5px', width: '18px'}}
                                 />
                                 <label>{category.cat_name}</label>
                                 </>
@@ -106,6 +119,8 @@ export default function AddProduct () {
                     value={discount}
                     name='discount'
                     onChange={(e) => onInputChange(e)}
+                    placeholder='Enter product discount'
+
                 />
 
                 <label style={{marginTop:'2rem'}}>Image URL</label>
@@ -115,6 +130,8 @@ export default function AddProduct () {
                     value={product_url}
                     name='product_url'
                     onChange={(e) => onInputChange(e)}
+                    placeholder='Enter the url for product image'
+
                 />
 
                 <label style={{marginTop:'2rem'}}>Days to Deliver</label>
@@ -124,13 +141,18 @@ export default function AddProduct () {
                     value={days_to_deliver}
                     name='days_to_deliver'
                     onChange={(e) => onInputChange(e)}
+                    placeholder='Enter the number of days for delivery'
+
                 />
             </div>
             <div style={{marginTop:'2rem'}}>
-                <button type="submit" onClick={handleSubmit}>Submit</button>
-                <button onClick={handleCancel}>Cancel</button>
+                <button className="addcatbutton" type="submit" onClick={handleSubmit}>Submit</button>
+                <button className="addcatbutton" style={{marginLeft:'10px', marginBottom:'30px'}} onClick={handleCancel}>Cancel</button>
             </div>
             </form>
         </div>
+        </div>
+        </div>
+        </>
     )
 }

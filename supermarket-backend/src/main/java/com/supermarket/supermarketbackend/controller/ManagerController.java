@@ -1,5 +1,6 @@
 package com.supermarket.supermarketbackend.controller;
 
+import com.supermarket.supermarketbackend.model.Login;
 import com.supermarket.supermarketbackend.model.Manager;
 import com.supermarket.supermarketbackend.repository.ManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,4 +55,14 @@ public class ManagerController {
         managerRepository.deleteById(id);
         return "User with id " + id + " has been deleted successfully.";
     }
+
+    @PostMapping("/manager/login")
+    boolean userLogin(@RequestBody Login newLogin) {
+        Manager manager=getByEmail(newLogin.email);
+        if(manager==null){
+            return false;
+        }
+        return newLogin.password.equals(manager.getManager_password());
+    }
+
 }

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {mobile} from "../responsive";
 import { Link } from "@material-ui/core";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -60,7 +61,9 @@ const LinkTo = styled.a`
   cursor: pointer;
 `;
 
-const Login = () => {
+const Login = (props) => {
+
+  const navigate = useNavigate()
 
   const [userCreds, setUserCreds] = useState({
     email: '',
@@ -72,12 +75,23 @@ const Login = () => {
       ...userCreds,
       [e.target.name] : e.target.value
     })
-  } 
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await axios.post(`http://localhost:8080/login`)
-    console.log();
+    await axios.post(`http://localhost:8080/user/login` , userCreds)
+      .then(res => {
+        console.log(res.data)
+        if(res.data) {
+          props.setIsUserLoggedIn(true)
+          navigate("/")
+        } else {
+          alert("Incorrect Password")
+        }
+      })
+    
+    const res = await axios.get(`http://localhost:8080/user/byEmail/${userCreds.email}`)
+    props.setUserId(res.data.user_id)
   }
 
   const {email, password} = userCreds

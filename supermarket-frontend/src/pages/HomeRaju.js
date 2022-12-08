@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
-export default function HomeRaju() {
+export default function HomeRaju(props) {
 
   const [categories, setCategories] = useState([])
 
@@ -22,7 +22,7 @@ export default function HomeRaju() {
 
   return (
     <>
-        <Navbar/>
+        <Navbar userId={props.userId}/>
         <div className="carousel"></div>
         <div className="allitems">
             <p>Shop By Catergory</p>

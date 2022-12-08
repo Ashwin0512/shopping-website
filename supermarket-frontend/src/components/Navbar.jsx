@@ -67,7 +67,7 @@ const MenuItem = styled.div`
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 
-const Navbar = () => {
+const Navbar = (props) => {
   return (
     <Container>
       <Wrapper>
@@ -87,7 +87,7 @@ const Navbar = () => {
           <Link to='./products'>
             <MenuItem>PRODUCTS</MenuItem>
           </Link>
-          <Link>
+          <Link to={`profile/${props.userId}`}>
             <MenuItem>MY ACCOUNT</MenuItem>
           </Link>
           <Link to="./cart">

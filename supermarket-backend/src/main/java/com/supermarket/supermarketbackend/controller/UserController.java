@@ -1,7 +1,7 @@
 package com.supermarket.supermarketbackend.controller;
 
-import com.supermarket.supermarketbackend.model.User;
 import com.supermarket.supermarketbackend.model.Login;
+import com.supermarket.supermarketbackend.model.User;
 import com.supermarket.supermarketbackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +21,21 @@ public class UserController {
         return  userRepository.save(newUser);
     }
 
+    @PostMapping("/user/login")
+    boolean userLogin(@RequestBody Login newLogin) {
+        User user=getByEmail(newLogin.email);
+        if(user==null){
+            return false;
+        }
+        System.out.println(newLogin.password.equals(user.getUser_password()));
+        return newLogin.password.equals(user.getUser_password());
+    }
+
+//    @GetMapping("user/isLoggedIn")
+//    boolean isUserLoggedIn() {
+//        return userLogin()
+//    }
+
 //    @RequestMapping("/login")
 //    public boolean findUserByPassword(@RequestParam("email") String email, @RequestParam("password") String password) {
 //        System.out.println(email);
@@ -34,19 +49,19 @@ public class UserController {
 //        return false;
 //    }
 
-    @PostMapping("/login")
-    boolean userLogin(@RequestBody Login newlogin) {
-        User user=getByEmail(newlogin.email);
-        if(user==null){
-            return false;
-        }
-        if(user!=null){
-            if(newlogin.password.equals(user.getUser_password())){
-                return true;
-            }
-        }
-        return false;
-    }
+//    @PostMapping("/login")
+//    boolean userLogin(@RequestBody Login newLogin) {
+//        User user=getByEmail(newLogin.email);
+//        if(user==null){
+//            return false;
+//        }
+//        if(user!=null){
+//            if(newLogin.password.equals(user.getUser_password())){
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
 //    public static byte[] getSHA(String input) throws NoSuchAlgorithmException
 //    {

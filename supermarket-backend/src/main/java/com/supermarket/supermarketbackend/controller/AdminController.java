@@ -1,6 +1,7 @@
 package com.supermarket.supermarketbackend.controller;
 
 import com.supermarket.supermarketbackend.model.Admin;
+import com.supermarket.supermarketbackend.model.Login;
 import com.supermarket.supermarketbackend.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -54,5 +55,13 @@ public class AdminController {
         adminRepository.deleteById(id);
         return "User with id " + id + " has been deleted successfully.";
     }
-}
 
+    @PostMapping("/admin/login")
+    boolean adminLogin(@RequestBody Login newLogin) {
+        Admin admin=getByEmail(newLogin.email);
+        if(admin==null){
+            return false;
+        }
+        return newLogin.password.equals(admin.getAdmin_password());
+    }
+}
