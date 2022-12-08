@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -54,4 +56,36 @@ public class UserController {
     User getByEmail(@PathVariable("email") String email) {
         return userRepository.findByEmail(email);
     }
+    @GetMapping("user/{id}")
+    User getUserById(@PathVariable UUID id) throws UserPrincipalNotFoundException {
+        return userRepository.findById(id).orElseThrow(()->new UserPrincipalNotFoundException(id.toString()));
+    }
+    @PutMapping("/user/{id}")
+    User updateUser(@RequestBody User newUser, @PathVariable UUID id) throws UserPrincipalNotFoundException {
+        return userRepository.findById(id).map(user -> {
+            user.setUser_name(newUser.getUser_name());
+            user.setUser_email(newUser.getUser_email());
+            user.setUser_phone(newUser.getUser_phone());
+            user.setUser_password(newUser.getUser_password());
+            user.setUser_address(newUser.getUser_address());
+            user.setWallet_balance((newUser.getWallet_balance()));
+            return userRepository.save(user);
+        }).orElseThrow(()->new UserPrincipalNotFoundException(id.toString()));
+    }
+
+    @DeleteMapping("user/{id}")
+    String deleteUser(@PathVariable UUID id) throws UserPrincipalNotFoundException {
+        if(!userRepository.existsById(id)) {
+            throw new UserPrincipalNotFoundException(id.toString());
+        }
+        userRepository.deleteById(id);
+        return "User with id " + id + " has been deleted successfully.";
+    }
+
+//    @PostMapping("/user/{id}/placeOrder")
+//    Order newOrder(@RequestBody Order newOrder) {
+//        return OrdersRepository.save(newOrder);
+//        //deduct money from user wallet balance
+//        //deduct item stock
+//    }
 }

@@ -14,6 +14,8 @@ public class User {
     private String user_password;
     private String user_address;
     private String user_phone;
+
+    private double wallet_balance;
     @Column(unique = true)
     private String user_email;
 
@@ -57,6 +59,14 @@ public class User {
         this.user_phone = user_phone;
     }
 
+    public double getWallet_balance() {
+        return wallet_balance;
+    }
+
+    public void setWallet_balance(double wallet_balance) {
+        this.wallet_balance = wallet_balance;
+    }
+
     public String getUser_email() {
         return user_email;
     }
@@ -65,13 +75,14 @@ public class User {
         this.user_email = user_email;
     }
 
-    public User(UUID user_id, String user_name, String user_password, String user_address, String user_phone, String user_email) {
+    public User(UUID user_id, String user_name, String user_password, String user_address, String user_phone, String user_email, double wallet_balance) {
         this.user_id = user_id;
         this.user_name = user_name;
         this.user_password = user_password;
         this.user_address = user_address;
         this.user_phone = user_phone;
         this.user_email = user_email;
+        this.wallet_balance = wallet_balance;
     }
 
     public User() {

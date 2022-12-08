@@ -82,12 +82,6 @@ const Login = () => {
   return (
     <Container>
       <Wrapper>
-        <Link href="http://localhost:3000/manager/login">
-          <Button style={{marginRight:'1rem'}}>Manager Login</Button>
-        </Link>
-        <Link href="http://localhost:3000/admin/login">
-          <Button>Admin Login</Button>
-        </Link>
         <Title>SIGN IN</Title>
         <Form onSubmit={(e) => handleSubmit(e)}>
           <Input 
@@ -105,8 +99,17 @@ const Login = () => {
             onChange={(e) => handleChange(e)}
           />
           <Button type="submit">LOGIN</Button>
-          <LinkTo>FORGOT PASSWORD?</LinkTo>
-          <LinkTo>CREATE A NEW ACCOUNT</LinkTo>
+          <LinkTo href="./forgotPassword">FORGOT PASSWORD?</LinkTo>
+          <LinkTo href="./register" >CREATE A NEW ACCOUNT</LinkTo>
+
+          <div style={{display:'flex', justifyContent:'space-between'}}>
+            <Link href="http://localhost:3000/manager/login">
+            <Button>Manager Login</Button>
+            </Link>
+            <Link href="http://localhost:3000/admin/login">
+              <Button>Admin Login</Button>
+            </Link>
+          </div>
         </Form>
       </Wrapper>
     </Container>

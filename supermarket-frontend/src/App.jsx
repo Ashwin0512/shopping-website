@@ -11,6 +11,7 @@ import ManagerHome from "./pages/manager/ManagerHome";
 import AddCategory from "./pages/manager/AddCategory";
 import ManagerLogin from "./pages/manager/ManagerLogin";
 import AdminLogin from "./pages/admin/AdminLogin";
+import ForgotPasseord from "./pages/ForgotPassword";
 
 const App = () => {
 
@@ -22,6 +23,7 @@ const App = () => {
       <Routes>
           <Route path="/" element={<Home />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/forgotPassword' element={<ForgotPasseord />} />
           <Route path='/register' element={<Register />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/products' element={<ProductList />} />

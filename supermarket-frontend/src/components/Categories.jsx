@@ -1,9 +1,8 @@
 import styled from "styled-components";
-// import { categories } from "../data";
 import { mobile } from "../responsive";
 import CategoryItem from "./CategoryItem";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -17,7 +16,15 @@ const Categories = () => {
 
   const [categories, setCategories] = useState([])
 
-  
+  useEffect(() => {
+    loadCategories();
+  },[])
+
+  const loadCategories = async () => {
+      const res = await axios.get("http://localhost:8080/categories")
+      console.log(res)
+      setCategories(res.data)
+  }
 
   return (
     <Container>

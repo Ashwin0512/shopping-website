@@ -18,6 +18,15 @@ public class Product {
     private double discount;
     private String product_url;
     private int days_to_deliver;
+    private int stock;
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
 
     public String getDesc() {
         return desc;
@@ -25,6 +34,10 @@ public class Product {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public void setProduct_name(String product_name) {
+        this.product_name = product_name;
     }
 
     public UUID getProduct_id() {
@@ -83,7 +96,7 @@ public class Product {
         this.days_to_deliver = days_to_deliver;
     }
 
-    public Product(UUID product_id, String category, String product_name, String desc, double price, double discount, String product_url, int days_to_deliver) {
+    public Product(UUID product_id, String category, String product_name, String desc, double price, double discount, String product_url, int days_to_deliver, int stock) {
         this.product_id = product_id;
         this.category = category;
         this.product_name = product_name;
@@ -92,6 +105,7 @@ public class Product {
         this.discount = discount;
         this.product_url = product_url;
         this.days_to_deliver = days_to_deliver;
+        this.stock = stock;
     }
 
     public Product() {

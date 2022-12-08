@@ -1,8 +1,8 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { sliderItems } from "../data";
 import { mobile } from "../responsive";
+import axios from "axios";
 
 const Container = styled.div`
   width: 100%;
@@ -80,12 +80,25 @@ const Button = styled.button`
 `;
 
 const Slider = () => {
+
+  const [categories, setCategories] = useState([])
+
+  useEffect(() => {
+    loadCategories();
+  },[])
+
+  const loadCategories = async () => {
+    const res = await axios.get("http://localhost:8080/categories")
+    console.log(res)
+    setCategories(res.data)
+  }
+
   const [slideIndex, setSlideIndex] = useState(0);
   const handleClick = (direction) => {
     if (direction === "left") {
-      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 3);
     } else {
-      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+      setSlideIndex(slideIndex < 3 ? slideIndex + 1 : 0);
     }
   };
 
@@ -95,15 +108,15 @@ const Slider = () => {
         <ArrowLeftOutlined />
       </Arrow>
       <Wrapper slideIndex={slideIndex}>
-        {sliderItems.map((item) => (
-          <Slide bg={item.bg} key={item.id}>
+        {categories.map((item) => (
+          <Slide bg={item.cat_url} key={item.cat_id}>
             <ImgContainer>
-              <Image src={item.img} />
+              <Image src={item.cat_url} />
             </ImgContainer>
             <InfoContainer>
-              <Title>{item.title}</Title>
-              <Desc>{item.desc}</Desc>
-              <Button>SHOW NOW</Button>
+              <Title>{item.cat_name}</Title>
+              <Desc>{item.cat_desc}</Desc>
+              <Button>SHOP NOW</Button>
             </InfoContainer>
           </Slide>
         ))}
