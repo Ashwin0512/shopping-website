@@ -60,7 +60,7 @@ const App = () => {
           {/* {isUserLoggedIn && */}
             <>
             <Route path="/home" element={<HomeRaju userId={userId} />} />
-            <Route path='/cart' element={<Cart />} />
+            <Route path='/cart' element={<Cart userId={userId} />}  />
             <Route path='/products' element={<ProductList />} />
             <Route path='/product/:product_id' element={<ProductPage />} />
             <Route path='/categories/:category_name' element={<CategoryPage />} />
