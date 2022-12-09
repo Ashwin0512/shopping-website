@@ -5,7 +5,8 @@ import Navbar from "../components/Navbar";
 import "./ProductPage.css";
 
 export default function ProductPage() {
-
+  const [value, setValue] = useState(1)
+  const navigate = useNavigate();
   const [product, setProduct] = useState({
     product_id: "",
     product_name: "",
@@ -25,14 +26,12 @@ export default function ProductPage() {
 
   const loadProduct = async () => {
     const res = await axios.get(`http://localhost:8080/product/${product_id}`)
-    console.log(res.data)
+    // console.log(res.data)
     setProduct(res.data)
   }
-  console.log(product.price)
+  // console.log(product.price)
 
   let { product_id } = useParams();
-
-  const navigate = useNavigate();
 
   let date = new Date()
   date.setDate(date.getDate() + product.days_to_deliver)
@@ -51,10 +50,14 @@ export default function ProductPage() {
         <label htmlFor="quantity">
           {" "}
           Quantity:
-          <input type="text" name="quantity" id="quantity" defaultValue = '1'/>
+          <input type="text" name="quantity" id="quantity" onChange={(e)=>{setValue(e.target.value)}} defaultValue = '1'/>
         </label>
 
-        <button className="addtocart">Add To Cart</button>
+        <button onClick={()=>{
+          cartAddition(product, navigate,value)
+          // navigate('')
+        }
+          } className="addtocart">Add To Cart</button>
         <p className="success" style={{color: "green" ,fontWeight:"bold", fontSize: "18px"}}>In Stock</p>
         <label style={{marginBottom: "6px"}} htmlFor="delivery">Delivery: 
         <input type="text" name="delivery" id="delivery" placeholder="Enter your pincode"/>
@@ -69,39 +72,33 @@ export default function ProductPage() {
   );
 }
 
-// function cartAddition(product, itemprice,navigate){
-//   let quan = document.getElementById('quantity').value;
-//   // console.log(quan);
-//   let arr = [];
-//   let newValue = {
-//     'name': product,
-//     'quantity': quan,
-//     'price' : itemprice
-//   };
-//   if(quan == null || quan == 0){
-//     alert('Value cannot be 0');
-//   }else{
-//     var retrievedData = localStorage.getItem("cartItems");
-//     var cartItemsRetreieved = JSON.parse(retrievedData);
-//     console.log(cartItemsRetreieved)
-//     navigate("/cart")
-//     if(cartItemsRetreieved == null || cartItemsRetreieved == 0){
-//       arr.push(newValue);
-//       addtoLocal(arr);
-//     }
-//     else{
-//       for(let i=0 ; i<cartItemsRetreieved.length; i++){
-//         arr.push(cartItemsRetreieved[i]);
-//       }
-//       arr.push(newValue);
-//       addtoLocal(arr)
-//     }
-//   }
-// return(
-//   <h1>ProductPage</h1>
-// )
-
-// }
+const cartAddition = (product,navigate, quantity)=> {
+  // let quan = document.getElementById('quantity').value;
+  let value = parseInt(quantity)
+  let arr = [];
+  let newValue = {...product, 'quantity': quantity};
+  console.log(newValue);
+  if(value == 0){
+    alert('Value cannot be 0');
+  }else{
+    var retrievedData = localStorage.getItem("cartItems");
+    navigate('/cart')
+    if(retrievedData == null || retrievedData == undefined){
+      arr.push(newValue);
+      addtoLocal(arr);
+    }
+    else{
+      var cartItemsRetreieved = JSON.parse(retrievedData);
+      console.log(cartItemsRetreieved)
+      for(let i=0 ; i<cartItemsRetreieved.length; i++){
+        arr.push(cartItemsRetreieved[i]);
+      }
+      arr.push(newValue);
+      addtoLocal(arr)
+    }
+  }
+  // navigate("/cart")
+}
 
 function addtoLocal(arr){
   localStorage.removeItem("cartItems");
