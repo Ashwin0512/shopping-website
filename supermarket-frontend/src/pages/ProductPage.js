@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate} from "react-router-dom";
 import Navbar from "../components/Navbar";
 import "./ProductPage.css";
+import Footer from "../components/Footer";
 
 export default function ProductPage() {
   const [value, setValue] = useState(1)
@@ -106,6 +107,7 @@ export default function ProductPage() {
 
       </div>
     </div>
+    <Footer />
     </>
   );
 }

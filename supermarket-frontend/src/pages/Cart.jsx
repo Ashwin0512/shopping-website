@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const Container = styled.div``;
 
@@ -155,9 +156,29 @@ const Button = styled.button`
   font-weight: 600;
 `;
 
-const Cart = () => {
+const Cart = (props) => {
+  // console.log(props.userId)
   const navigate = useNavigate();
   const [arr, setArr] = useState([]);
+  const [user, setUser] = useState({
+    user_name: '',
+    user_password: '',
+    user_address: '',
+    user_phone: '',
+    user_email: '',
+    wallet_balance: 0
+  });
+
+  const [order, setOrder] = useState({
+    order_date: '',
+    ItemID: '',
+    user_id: '',
+    UserName: '',
+    StockOrdered : '',
+    total_amount: '',
+    order_expected: ''
+  })
+
   let cartItemsRetreieved;
   const [Tamount, setTamount] = useState(0);
 
@@ -173,7 +194,7 @@ const Cart = () => {
     setArr(cartItemsRetreieved);
     getTotal(cartItemsRetreieved);
     }
-    console.log(cartItemsRetreieved)
+    // console.log(cartItemsRetreieved)
   };
 
   const getTotal = (array) => {
@@ -200,9 +221,61 @@ const Cart = () => {
                             );
   }
 
+  const getUserInfo = async () => {
+    const res = await axios.get(`http://localhost:8080/user/${props.userId}`)
+    console.log(res.data)
+    setUser(res.data)
+    // console.log(props.userId)
+  }
+
   useEffect(() => {
+    getUserInfo();
     getCartItems();
   }, []);
+ 
+  const updateUserWallet = (balance) => {
+    user.wallet_balance = balance;
+    setUser(user);
+    axios.put(`http://localhost:8080/user/${props.userId}`,user)
+  }
+  
+  const updateProductStock = async ()=> {
+    for(let i=0; i < arr.length ; i++){
+      console.log(arr[i].product_id)
+      let res = await axios.get(`http://localhost:8080/product/${arr[i].product_id}`)
+      res.data.stock = res.data.stock - arr[i].quantity
+      axios.put(`http://localhost:8080/product/${arr[i].product_id}`, res.data);
+    }
+  }
+
+  const updateOrders = (user_id,user_name) => {
+    for(let i=0; i<arr.length;i++){
+      setOrder({
+        order_date: new Date(),
+        ItemID: arr[i].product_id,
+        user_id: user_id,
+        UserName: user_name,
+        StockOrdered : arr[i].quantity,
+        total_amount: Tamount+350,
+        order_expected: "14 Dec, 2022"
+      })
+      axios.post(`http://localhost:8080/user/${user_id}/placeOrder`, order)
+      
+    }
+  }
+
+  const finalCheckout = () => {
+    console.log(Tamount)
+    if(user.wallet_balance > (Tamount + 350)){
+      let balance = user.wallet_balance - Tamount - 350;
+      updateUserWallet(balance);
+      updateProductStock();
+      updateOrders(user.user_id, user.user_name);
+      alert(`Updated wallet balance: ${balance}`)
+    }else{
+      alert(`${user.user_name} doesnot have enough balance.`)
+    }
+  }
 
   return (
     <Container>
@@ -292,7 +365,7 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>₹{parseInt(Tamount) + 350}</SummaryItemPrice>
             </SummaryItem>
-            <Button>CHECKOUT NOW</Button>
+            <Button onClick={()=>{finalCheckout()}}>CHECKOUT NOW</Button>
           </Summary>
         </Bottom>
       </Wrapper>
