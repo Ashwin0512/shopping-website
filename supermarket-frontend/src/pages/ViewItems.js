@@ -28,7 +28,7 @@ export default function ViewItems() {
                 <div class="productcards" key={item.product_id}>
                 <div className="productimg">
                   <img
-                    src="https://source.unsplash.com/150x150?clothes"
+                    src={item.product_url}
                     alt="productimage"
                   />
                 </div>
@@ -48,7 +48,7 @@ export default function ViewItems() {
                   <button
                     className="editbutton"
                     onClick={() => {
-                      navigate("/updateproduct");
+                      navigate(`../product/edit?id=${item.product_id}`);
                     }}
                   >
                     Edit Product

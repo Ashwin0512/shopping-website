@@ -43,6 +43,7 @@
     font-size: 18px;
     border-radius: 5px;
     background-color: rgb(255, 191, 0);
+    cursor: pointer;
 }
 
 .addtocart i{

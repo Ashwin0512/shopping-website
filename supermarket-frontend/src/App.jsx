@@ -24,6 +24,7 @@ import ManageUsers from "./pages/ManageUsers";
 import ViewCategories from "./pages/ViewCategories";
 import Wallet from "./pages/Wallet";
 import Orders from "./pages/Orders";
+import UpdateProduct from "./pages/UpdateProduct";
 
 const App = () => {
 
@@ -78,6 +79,7 @@ const App = () => {
               <Route path='category/add' element={<AddCategory />}/>
               <Route path='categories/view' element={<ViewCategories />}/>
               <Route path='login' element={<ManagerLogin />}/>
+              <Route path='product/edit' element={<UpdateProduct/>}/>
             </Route>
           {/* } */}
 

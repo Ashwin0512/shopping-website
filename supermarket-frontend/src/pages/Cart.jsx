@@ -4,6 +4,8 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
+import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
 const Container = styled.div``;
 
@@ -154,6 +156,54 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+  const navigate = useNavigate();
+  const [arr, setArr] = useState([]);
+  let cartItemsRetreieved;
+  const [Tamount, setTamount] = useState(0);
+
+  const getCartItems = async () => {
+    var retrievedData = localStorage.getItem("cartItems");
+    if(retrievedData == undefined || retrievedData == null)
+    {
+        return (
+            'No Data'
+        )
+    }else{
+    cartItemsRetreieved = await JSON.parse(retrievedData);
+    setArr(cartItemsRetreieved);
+    getTotal(cartItemsRetreieved);
+    }
+    // console.log(cartItemsRetreieved)
+  };
+
+  const getTotal = (array) => {
+    let value = 0;
+    for (let i = 0; i < array.length; i++) {
+      value += array[i].price * array[i].quantity;
+    }
+    setTamount(value);
+  };
+
+  const deleteItem = (index) => {
+    arr.splice(arr[index],1);
+    setArr(arr);
+    console.log(arr)
+    updateLocal(arr);
+    getTotal(arr);
+  }
+
+  const updateLocal = (array) => {
+    localStorage.removeItem("cartItems");
+                            localStorage.setItem(
+                              "cartItems",
+                              JSON.stringify(array)
+                            );
+  }
+
+  useEffect(() => {
+    getCartItems();
+  }, []);
+
   return (
     <Container>
       <Navbar />

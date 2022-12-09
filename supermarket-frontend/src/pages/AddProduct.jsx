@@ -15,10 +15,11 @@ export default function AddProduct () {
         category:'',
         discount:'',
         product_url:'',
-        days_to_deliver:''
+        days_to_deliver:'',
+        stock:''
     })
 
-    const {product_name,price,desc,discount,product_url,days_to_deliver} = product
+    const {product_name,price,desc,discount,product_url,days_to_deliver, stock} = product
 
     const [categories, setCategories] = useState([])
 
@@ -61,7 +62,7 @@ export default function AddProduct () {
             <form onSubmit={(e) => handleSubmit(e)}>
             <div style={{display:'flex', flexDirection:'column', margin:'-10px auto'}}>
                 
-                <label style={{marginTop:'2rem'}}>Name</label>
+                <label style={{marginTop:'2rem'}}>Name: </label>
                 <input 
                     style={{width:'30vw'}} 
                     type='text'
@@ -71,7 +72,7 @@ export default function AddProduct () {
                     placeholder='Enter product name'
                 />
 
-                <label style={{marginTop:'2rem'}}>Price</label>
+                <label style={{marginTop:'2rem'}}>Price: </label>
                 <input 
                     style={{width:'30vw'}} 
                     type='number'
@@ -82,7 +83,7 @@ export default function AddProduct () {
 
                 />
 
-                <label style={{marginTop:'2rem'}}>Description</label>
+                <label style={{marginTop:'2rem'}}>Description: </label>
                 <input 
                     style={{width:'30vw'}} 
                     type='text'
@@ -93,7 +94,7 @@ export default function AddProduct () {
 
                 />
 
-                <label style={{marginTop:'2rem'}}>Category</label>
+                <label style={{marginTop:'2rem'}}>Category: </label>
                 <div>
                     {
                         categories.map(category => {
@@ -112,7 +113,7 @@ export default function AddProduct () {
                         })
                     }
                 </div>
-                <label style={{marginTop:'2rem'}}>Discount</label>
+                <label style={{marginTop:'2rem'}}>Discount: </label>
                 <input 
                     style={{width:'30vw'}} 
                     type='number'
@@ -123,7 +124,7 @@ export default function AddProduct () {
 
                 />
 
-                <label style={{marginTop:'2rem'}}>Image URL</label>
+                <label style={{marginTop:'2rem'}}>Image URL: </label>
                 <input 
                     style={{width:'30vw'}} 
                     type='url'
@@ -134,7 +135,7 @@ export default function AddProduct () {
 
                 />
 
-                <label style={{marginTop:'2rem'}}>Days to Deliver</label>
+                <label style={{marginTop:'2rem'}}>Days to Deliver: </label>
                 <input 
                     style={{width:'30vw'}} 
                     type='number'
@@ -142,6 +143,17 @@ export default function AddProduct () {
                     name='days_to_deliver'
                     onChange={(e) => onInputChange(e)}
                     placeholder='Enter the number of days for delivery'
+
+                />
+
+                <label style={{marginTop:'2rem'}}>Stock: </label>
+                <input 
+                    style={{width:'30vw'}} 
+                    type='number'
+                    value={stock}
+                    name='stock'
+                    onChange={(e) => onInputChange(e)}
+                    placeholder='Enter the product stock available'
 
                 />
             </div>
