@@ -11,7 +11,7 @@ const PdfGenerator = (props) => {
   },[])
 
   const loadOrderData = async () => {
-    const res = await axios.get("http://localhost:8080/users")
+    const res = await axios.get("http://localhost:8080/orders")
     console.log(res.data)
     setOrderData(res.data)
   }

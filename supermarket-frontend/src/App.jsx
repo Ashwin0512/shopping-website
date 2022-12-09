@@ -53,7 +53,7 @@ const App = () => {
             setAdminId={setAdminId} 
           />
         }
-          />
+        />
 
           <Route path='/forgotPassword' element={<ForgotPasseord />} />
           <Route path='/register' element={<Register />}/>
@@ -77,7 +77,7 @@ const App = () => {
               <Route path='product/add' element={<AddProduct />} />
               <Route path='products/view' element={<ViewItems />} />
               <Route path='category/add' element={<AddCategory />}/>
-              <Route path='categories/view' element={<ViewCategories />}/>
+              {/* <Route path='categories/view' element={<ViewCategories />}/> */}
               <Route path='login' element={<ManagerLogin />}/>
               <Route path='product/edit' element={<UpdateProduct/>}/>
             </Route>
@@ -87,8 +87,10 @@ const App = () => {
             <Route path="admin">
               <Route path="home" element={<AdminProfile adminId={adminId} />} />
               <Route path="generateReport" element={<PdfGenerator />} />
-              <Route path="viewItems" element={<ViewItems_Admin />} />
+              <Route path="viewItems" element={<ViewItems />} />
+              <Route path="addItems" element={<AddProduct />} />
               <Route path="manageUsers" element={<ManageUsers />} />
+              <Route path='product/edit' element={<UpdateProduct/>}/>
             </Route>
           {/* } */}
           
