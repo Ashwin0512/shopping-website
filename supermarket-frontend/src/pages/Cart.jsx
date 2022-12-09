@@ -173,7 +173,7 @@ const Cart = () => {
     setArr(cartItemsRetreieved);
     getTotal(cartItemsRetreieved);
     }
-    // console.log(cartItemsRetreieved)
+    console.log(cartItemsRetreieved)
   };
 
   const getTotal = (array) => {
@@ -213,82 +213,84 @@ const Cart = () => {
         <Top>
           <TopButton>CONTINUE SHOPPING</TopButton>
           <TopTexts>
-            <TopText>Shopping Bag(2)</TopText>
+            <TopText>Shopping Bag({arr.length})</TopText>
             <TopText>Your Wishlist (0)</TopText>
           </TopTexts>
           <TopButton type="filled">CHECKOUT NOW</TopButton>
         </Top>
         <Bottom>
           <Info>
-            <Product>
+            {arr.map((item)=>{
+              return(
+                <Product style={{boxShadow: '1px 1px 5px 1px rgba(0, 0, 0, 0.133)', marginRight: '20px', height: '150px', marginTop: '20px'}}>
               <ProductDetail>
-                <Image src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1614188818-TD1MTHU_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHERS_THUNDER_b01b1013-cd8d-48e7-bed9-52db26515dc4.png?crop=1xw:1.00xh;center,top&resize=480%3A%2A" />
+                <Image style={{cursor:'pointer'}} src={item.product_url} onClick={()=>{
+                  navigate(`/product/${item.product_id}`)
+                }} />
                 <Details>
                   <ProductName>
-                    <b>Product:</b> JESSIE THUNDER SHOES
+                    <b>Product:</b> {item.product_name}
                   </ProductName>
                   <ProductId>
-                    <b>ID:</b> 93813718293
+                    <b>Price:</b> {item.price}
                   </ProductId>
-                  <ProductColor color="black" />
+                  {/* <ProductColor color="black" /> */}
                   <ProductSize>
-                    <b>Size:</b> 37.5
+                    <label style={{ margin: "10px 0 0 0px" }} htmlFor="quantity">
+                    <b>Quantity:</b> 
+                      <input
+                        type="text"
+                        onChange={(e) => {
+                          if (
+                            e.target.value == undefined ||
+                            e.target.value == NaN
+                          ) {
+                            item.quantity = "0";
+                          } else {
+                            item.quantity = e.target.value;
+                            console.log(item);
+                            setArr(arr);
+                            updateLocal(arr);
+                            getTotal(arr);
+                          }
+                        }}
+                        name="quantity"
+                        style={{
+                          width: "25px",
+                          marginLeft: "5px",
+                          height: "50%",
+                        }}
+                        defaultValue={parseInt(item.quantity)}
+                      />
+                      </label>
                   </ProductSize>
+                  <button style={{border: 'none', background: 'inherit', width: '20px', cursor: 'pointer', marginLeft: '-5px', fontSize:'16px '}} onClick={()=>{deleteItem(arr.indexOf(item))}} className="cartdelete"><i className="bi bi-trash3-fill"></i></button>
                 </Details>
               </ProductDetail>
               <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>$ 30</ProductPrice>
+                <ProductPrice style={{marginRight: '-180px'}}>₹{item.price * item.quantity}</ProductPrice>
               </PriceDetail>
             </Product>
-            <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src="https://i.pinimg.com/originals/2d/af/f8/2daff8e0823e51dd752704a47d5b795c.png" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> HAKURA T-SHIRT
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 93813718293
-                  </ProductId>
-                  <ProductColor color="gray" />
-                  <ProductSize>
-                    <b>Size:</b> M
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>1</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>$ 20</ProductPrice>
-              </PriceDetail>
-            </Product>
+              )
+            })}
           </Info>
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
+              <SummaryItemPrice>₹{Tamount}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>$ 5.90</SummaryItemPrice>
+              <SummaryItemPrice>₹100</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
-              <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice>$ -5.90</SummaryItemPrice>
+              <SummaryItemText>Taxes</SummaryItemText>
+              <SummaryItemPrice>₹250</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
+              <SummaryItemPrice>₹{parseInt(Tamount) + 350}</SummaryItemPrice>
             </SummaryItem>
             <Button>CHECKOUT NOW</Button>
           </Summary>

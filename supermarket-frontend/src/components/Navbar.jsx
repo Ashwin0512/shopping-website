@@ -92,7 +92,7 @@ const Navbar = (props) => {
           </Link>
           <Link to="/cart">
             <MenuItem>
-              <Badge badgeContent={4} color="primary">
+              <Badge badgeContent={<i style={{fontSize: '5px'}} className="bi bi-circle-fill"></i>} color="primary">
                 <ShoppingCartOutlined />
               </Badge>
             </MenuItem>

@@ -24,6 +24,44 @@ export default function ProductPage() {
     loadProduct();
   },[])
 
+  const cartAddition = (product, quantity)=> {
+    let value = parseInt(quantity)
+    let arr = [];
+    if(value > product.stock){
+      alert(`${product.product_name} is not available in this quantity.`)
+      setValue(product.stock)
+      document.getElementById('quantity').value = product.stock;
+    } else{
+    let newValue = {...product, 'quantity': quantity};
+    console.log(newValue);
+    if(value == 0){
+      alert('Value cannot be 0');
+    }else{
+      var retrievedData = localStorage.getItem("cartItems");
+      navigate('/cart')
+      if(retrievedData == null || retrievedData == undefined){
+        arr.push(newValue);
+        addtoLocal(arr);
+      }
+      else{
+        var cartItemsRetreieved = JSON.parse(retrievedData);
+        console.log(cartItemsRetreieved)
+        for(let i=0 ; i<cartItemsRetreieved.length; i++){
+          arr.push(cartItemsRetreieved[i]);
+        }
+        arr.push(newValue);
+        addtoLocal(arr)
+      }
+    }
+  }
+  }
+  
+  function addtoLocal(arr){
+    localStorage.removeItem("cartItems");
+    localStorage.setItem("cartItems", JSON.stringify(arr))
+  }
+  
+
   const loadProduct = async () => {
     const res = await axios.get(`http://localhost:8080/product/${product_id}`)
     // console.log(res.data)
@@ -54,7 +92,7 @@ export default function ProductPage() {
         </label>
 
         <button onClick={()=>{
-          cartAddition(product, navigate,value)
+          cartAddition(product,value)
           // navigate('')
         }
           } className="addtocart">Add To Cart</button>
@@ -72,35 +110,3 @@ export default function ProductPage() {
   );
 }
 
-const cartAddition = (product,navigate, quantity)=> {
-  // let quan = document.getElementById('quantity').value;
-  let value = parseInt(quantity)
-  let arr = [];
-  let newValue = {...product, 'quantity': quantity};
-  console.log(newValue);
-  if(value == 0){
-    alert('Value cannot be 0');
-  }else{
-    var retrievedData = localStorage.getItem("cartItems");
-    navigate('/cart')
-    if(retrievedData == null || retrievedData == undefined){
-      arr.push(newValue);
-      addtoLocal(arr);
-    }
-    else{
-      var cartItemsRetreieved = JSON.parse(retrievedData);
-      console.log(cartItemsRetreieved)
-      for(let i=0 ; i<cartItemsRetreieved.length; i++){
-        arr.push(cartItemsRetreieved[i]);
-      }
-      arr.push(newValue);
-      addtoLocal(arr)
-    }
-  }
-  // navigate("/cart")
-}
-
-function addtoLocal(arr){
-  localStorage.removeItem("cartItems");
-  localStorage.setItem("cartItems", JSON.stringify(arr))
-}
