@@ -54,7 +54,16 @@ export default function ViewItems() {
                     Edit Product
                   </button>
                   <br />
-                  <button className="deletebutton">Delete Product</button>
+                  <button 
+                    onClick={ async () => {
+                      if(window.confirm) {
+                        await axios.delete(`http://localhost:8080/product/${item.product_id}`)
+                        alert("Item Deleted Successfully")
+                        navigate('../home')
+                      }
+                    }} 
+                    className="deletebutton"
+                  >Delete Product</button>
                 </div>
               </div>
             )
