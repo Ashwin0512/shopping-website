@@ -4,13 +4,12 @@ import "./SideBar.css"
 import axios from 'axios'
 
 export default function SideBar(props) {
-
   const navigate = useNavigate()
 
   const handleDelete = async (e) => {
     if(window.confirm("Are you sure to delete your account?")) {
       await axios.delete(`http://localhost:8080/user/${props.userId}`)
-      .then(navigate("/login"))
+      .then(navigate("/"))
     }
   }
 
@@ -21,7 +20,7 @@ export default function SideBar(props) {
         </div>
         <div className='sidebar'>
             <ul>
-                <li><Link to='/profile' className='sidelink' style={{textDecoration: 'none', color:'black'}}>Edit Profile</Link></li>
+                <li><Link to={`/profile/${props.userId}`} className='sidelink' style={{textDecoration: 'none', color:'black'}}>Edit Profile</Link></li>
                 <li><Link to='/orders' className='sidelink' style={{textDecoration: 'none', color:'black'}}>View Orders</Link></li>
                 <li><Link to='/wallet' className='sidelink' style={{textDecoration: 'none', color:'black'}}>Wallet</Link></li>
                 <li onClick={handleDelete}><Link className='sidelink' style={{textDecoration: 'none', color:'red', marginRight:'8px'}}>Delete Account</Link></li>

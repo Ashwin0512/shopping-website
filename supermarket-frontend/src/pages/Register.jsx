@@ -85,7 +85,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios.post("http://localhost:8080/add/user", user)
-    navigate("/login")
+    navigate("/")
   }
 
   return (

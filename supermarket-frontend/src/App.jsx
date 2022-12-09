@@ -17,50 +17,76 @@ import CategoryPage from "./pages/CategoryPage";
 import ViewItems from "./pages/ViewItems";
 import Profile from "./pages/Profile";
 import { useState } from "react";
-// import { isUserLoggedIn } from "./pages/Login";
-
-// let isUserLoggedIn = false
-// let isManagerLoggedIn = false
-// let isAdminLoggedIn = false
+import AdminProfile from "./pages/AdminProfile";
+import PdfGenerator from "./Reports";
+import ViewItems_Admin from "./pages/ViewItems_admin";
+import ManageUsers from "./pages/ManageUsers";
+import ViewCategories from "./pages/ViewCategories";
+import Wallet from "./pages/Wallet";
+import Orders from "./pages/Orders";
 
 const App = () => {
 
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
+  const [isManagerLoggedIn, setIsManagerLoggedIn] = useState(false)
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false)
   const [userId, setUserId] = useState()
+  const [managerId, setManagerId] = useState()
+  const [adminId, setAdminId] = useState()
 
   return(
     <BrowserRouter>
       <Routes>
-          <Route path='/login' element={<Login isUserLoggedIn={isUserLoggedIn} setIsUserLoggedIn={setIsUserLoggedIn} userId={userId} setUserId={setUserId} />} />
+          <Route path='/' element={<Login 
+            isUserLoggedIn={isUserLoggedIn}
+            isManagerLoggedIn={isManagerLoggedIn}
+            isAdminLoggedIn={isAdminLoggedIn}
+            setIsUserLoggedIn={setIsUserLoggedIn} 
+            setIsManagerLoggedIn={setIsManagerLoggedIn}
+            setIsAdminLoggedIn={setIsAdminLoggedIn}
+            userId={userId} 
+            setUserId={setUserId}
+            managerId={managerId} 
+            setManagerId={setManagerId}
+            adminId={adminId} 
+            setAdminId={setAdminId} 
+          />
+        }
+          />
 
           <Route path='/forgotPassword' element={<ForgotPasseord />} />
+          <Route path='/register' element={<Register />}/>
           {/* {isUserLoggedIn && */}
             <>
-            <Route path="/" element={<HomeRaju userId={userId} />} />
-            <Route path='/register' element={<Register />} />
+            <Route path="/home" element={<HomeRaju userId={userId} />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/products' element={<ProductList />} />
             <Route path='/product/:product_id' element={<ProductPage />} />
             <Route path='/categories/:category_name' element={<CategoryPage />} />
             <Route path='/profile/:user_id' element={<Profile userId={userId}/>} />
+            <Route path='/orders' element={<Orders />} />
+            <Route path='/wallet' element={<Wallet />} />
             </>
-          {/* }  */}
+          {/* } */}
           
 
           {/* {isManagerLoggedIn &&  */}
             <Route path="/manager">
-              <Route path="home" element={<ManagerProfile />} />
+              <Route path="home" element={<ManagerProfile managerId={managerId} />} />
               <Route path='product/add' element={<AddProduct />} />
               <Route path='products/view' element={<ViewItems />} />
               <Route path='category/add' element={<AddCategory />}/>
-              <Route path='categories/view' element={<AddCategory />}/>
+              <Route path='categories/view' element={<ViewCategories />}/>
               <Route path='login' element={<ManagerLogin />}/>
             </Route>
           {/* } */}
 
           {/* {  isAdminLoggedIn &&  */}
             <Route path="admin">
-              <Route path="login" element={<AdminLogin />} />
+              <Route path="home" element={<AdminProfile adminId={adminId} />} />
+              <Route path="generateReport" element={<PdfGenerator />} />
+              <Route path="viewItems" element={<ViewItems_Admin />} />
+              <Route path="manageUsers" element={<ManageUsers />} />
             </Route>
           {/* } */}
           

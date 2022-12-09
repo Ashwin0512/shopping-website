@@ -1,0 +1,32 @@
+.orderscard{
+    margin: 40px 0;
+    margin-top: 50px;
+    width: 60vw;
+    height: 500px;
+    box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.133);
+}
+.p{
+    text-align: left;
+    font-size: 18px;
+    margin: 20px;
+    margin-left: 30px;
+    font-weight: bold;
+}
+.order{
+    width: 800px;
+    /* background: rgb(215, 215, 215); */
+    margin: 10px auto;
+    text-align: left;
+    box-shadow: 1px  1px 5px 1px rgba(0, 0, 0, 0.182);
+}
+
+.status{
+    padding: 10px;
+    font-size: 17px;
+}
+
+.det{
+    background: rgb(198, 198, 198);
+    height: 100px;
+    padding: 10px;
+}

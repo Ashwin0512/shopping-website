@@ -1,0 +1,68 @@
+.walletbank{
+    box-shadow: 1px 2px 5px 1px rgba(0, 0, 0, 0.105);
+    width: 500px;
+    margin: 2rem auto;
+    height: 500px;
+    border-radius: 5px;
+}
+
+.walletbank p{
+    margin-top: 20px;
+    padding-top: 20px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.tamount{
+    text-align: left;
+    margin: 2rem 25px;
+    font-size: 16px;
+}
+
+#amount{
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: 25px;
+    padding: 5px 10px;
+}
+
+.walletbank label{
+    font-size: 25px;
+}
+
+.addmoney{
+    border: none;
+    margin: 20px auto;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 10px;
+    background-color: rgb(23, 189, 255);
+    color: whitesmoke;
+}
+
+.walletcard{
+    width: 350px;
+    margin: 10px auto;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+    border-radius: 20px;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.288);
+}
+
+.walletcard div{
+    padding: 10px 20px;
+}
+
+.pmeth{
+    border: 1px solid green;
+    width: 180px;
+    height: 48px;
+    margin: 15px auto;
+    color: green;
+    vertical-align: middle;
+    border-radius: 25px;
+}
+

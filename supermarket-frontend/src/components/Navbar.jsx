@@ -84,13 +84,13 @@ const Navbar = (props) => {
           </Link>
         </Center>
         <Right>
-          <Link to='./products'>
+          <Link to='/products'>
             <MenuItem>PRODUCTS</MenuItem>
           </Link>
-          <Link to={`profile/${props.userId}`}>
+          <Link to={`../profile/${props.userId}`}>
             <MenuItem>MY ACCOUNT</MenuItem>
           </Link>
-          <Link to="./cart">
+          <Link to="/cart">
             <MenuItem>
               <Badge badgeContent={4} color="primary">
                 <ShoppingCartOutlined />

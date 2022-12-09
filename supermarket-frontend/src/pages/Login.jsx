@@ -84,14 +84,46 @@ const Login = (props) => {
         console.log(res.data)
         if(res.data) {
           props.setIsUserLoggedIn(true)
-          navigate("/")
+          navigate("/home")
         } else {
-          alert("Incorrect Password")
+          alert("Incorrect Credentials")
         }
       })
     
     const res = await axios.get(`http://localhost:8080/user/byEmail/${userCreds.email}`)
     props.setUserId(res.data.user_id)
+  }
+
+  const handleManagerLogin = async (e) => {
+    e.preventDefault()
+    const res = await axios.get(`http://localhost:8080/admin/byEmail/${userCreds.email}`)
+    props.setManagerId(res.data.user_id)
+    await axios.post(`http://localhost:8080/manager/login` , userCreds)
+    .then(res => {
+      if(res.data) {
+        props.setIsManagerLoggedIn(true)
+        navigate('/manager/home')
+      } else
+      {
+        alert("Incorrect Credentials")
+      }
+    })
+  }
+
+  const handleAdminLogin = async (e) => {
+    e.preventDefault()
+    const res = await axios.get(`http://localhost:8080/admin/byEmail/${userCreds.email}`)
+    props.setAdminId(res.data.user_id)
+    await axios.post(`http://localhost:8080/admin/login` , userCreds)
+    .then(res => {
+      if(res.data) {
+        props.setIsAdminLoggedIn(true)
+        navigate('/admin/home')
+      } else
+      {
+        alert("Incorrect Credentials")
+      }
+    })
   }
 
   const {email, password} = userCreds
@@ -120,10 +152,10 @@ const Login = (props) => {
           <LinkTo href="./register" >CREATE A NEW ACCOUNT</LinkTo>
 
           <div style={{display:'flex', justifyContent:'space-between'}}>
-            <Link href="http://localhost:3000/manager/login">
+            <Link onClick={handleManagerLogin} href="http://localhost:3000/manager/login"> 
             <Button>Login as Manager</Button>
             </Link>
-            <Link href="http://localhost:3000/admin/login">
+            <Link onClick={handleAdminLogin} href="http://localhost:3000/admin/login">
               <Button>Login as Admin</Button>
             </Link>
           </div>
