@@ -21,10 +21,10 @@ public class OrderController {
         return orderRepository.findAll();
     }
 
-    @PostMapping("/add/order")
-    Order newOrder(@RequestBody Order newOrder) {
-        return orderRepository.save(newOrder);
-    }
+//    @PostMapping("/add/order")
+//    Order newOrder(@RequestBody Order newOrder) {
+//        return orderRepository.save(newOrder);
+//    }
 
     @GetMapping("/order/{id}")
     Order getOrderById(@PathVariable("id") UUID id) {
@@ -39,5 +39,12 @@ public class OrderController {
     @GetMapping("/orders/{date}")
     List<Order> getOrdersByDate(@PathVariable("date") Date date) {
         return orderRepository.findOrdersByDate(date);
+    }
+    @PostMapping("/user/{id}/placeOrder")
+    Order newOrder(@RequestBody Order newOrder) {
+        return orderRepository.save(newOrder);
+        //deduct money from user wallet balance
+        //alert dedena...
+        //deduct item stock
     }
 }

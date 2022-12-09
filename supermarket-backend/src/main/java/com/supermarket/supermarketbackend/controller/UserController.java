@@ -118,10 +118,4 @@ public class UserController {
         return "User with id " + id + " has been deleted successfully.";
     }
 
-//    @PostMapping("/user/{id}/placeOrder")
-//    Order newOrder(@RequestBody Order newOrder) {
-//        return OrdersRepository.save(newOrder);
-//        //deduct money from user wallet balance
-//        //deduct item stock
-//    }
 }
