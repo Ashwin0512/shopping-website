@@ -1,13 +1,23 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { Link, useNavigate } from 'react-router-dom'
 import "./SideBar.css"
 
-export default function SideBar_admin() {
+export default function SideBar_admin(props) {
+
+  const navigate = useNavigate()
+
+  const handleDelete = async (e) => {
+    if(window.confirm("Are you sure to delete your account?")) {
+      await axios.delete(`http://localhost:8080/admin/${props.adminId}`)
+      .then(navigate("/"))
+    }
+  }
+
   return (
     <div style={{marginLeft: '100px'}}>
         <div className='acc'>
-            <span style={{fontWeight: 'bold'}}>Accout Details: </span><br/>
-            Shreyans Soni
+            <span style={{fontWeight: 'bold'}}>Accout Details</span><br/>
         </div>
         <div className='sidebar'>
             <ul>
@@ -19,7 +29,7 @@ export default function SideBar_admin() {
                 {/* <li><Link className='sidelink' style={{textDecoration: 'none', color:'black'}}>Update Item</Link></li> */}
                 <li><Link to='/admin/manageUsers' className='sidelink' style={{textDecoration: 'none', color:'black'}}>Manage Users</Link></li>
                 {/* <li><Link className='sidelink' style={{textDecoration: 'none', color:'black'}}>Delete Item</Link></li> */}
-                <li><Link className='sidelink' style={{textDecoration: 'none', color:'red', marginRight:'8px'}}>Delete Account</Link></li>
+                <li onClick={handleDelete} ><Link className='sidelink' style={{textDecoration: 'none', color:'red', marginRight:'8px'}}>Delete Account</Link></li>
 
             </ul>
         </div>

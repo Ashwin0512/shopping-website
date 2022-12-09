@@ -1,16 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import jsPDF from 'jspdf'
+import axios from 'axios';
 
 const PdfGenerator = (props) => {
-  // console.log(props.data)
-  const [pdfData, setPdfData] = useState();
-  // setPdfData(props.data);
+
+  const [orderData, setOrderData] = useState([]);
+
+  useEffect(() => {
+    loadOrderData()
+  },[])
+
+  const loadOrderData = async () => {
+    const res = await axios.get("http://localhost:8080/users")
+    console.log(res.data)
+    setOrderData(res.data)
+  }
 
   const jsPdfGenerator = () => {
     var doc = new jsPDF('p','pt');
 
-    for(let i=1; i<=props.data.length;i++){
-      doc.text(i*10,i*20, JSON.stringify(props.data[i-1]));
+    for(let i=1; i<=orderData.length;i++){
+      doc.text(10,i*20, JSON.stringify(orderData[i-1]));
     }
     doc.save('generated.pdf');
   }

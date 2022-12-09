@@ -49,7 +49,7 @@ export default function AdminProfile(props) {
     <>
     <Navbar />
     <div style={{ display: "flex" }}>
-        <SideBar_admin/>
+        <SideBar_admin adminId={props.adminId} />
         <div className="profilecard">
         <h1>Edit Profile</h1>
         <form onSubmit={(e) => handleSubmit(e)}>
