@@ -66,7 +66,7 @@ const App = () => {
             <Route path='/categories/:category_name' element={<CategoryPage />} />
             <Route path='/profile/:user_id' element={<Profile userId={userId}/>} />
             <Route path='/orders' element={<Orders />} />
-            <Route path='/wallet' element={<Wallet />} />
+            <Route path='/wallet' element={<Wallet userId={userId}/>} />
             </>
           {/* } */}
           

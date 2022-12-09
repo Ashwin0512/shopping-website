@@ -54,7 +54,7 @@ export default function ManagerProfile(props) {
     <>
     <Navbar />
     <div style={{ display: "flex" }}>
-        <SideBar_manager/>
+        <SideBar_manager managerId={props.managerId}/>
         <div className="profilecard">
         <h1>Edit Profile</h1>
         <form onSubmit={(e) => handleSubmit(e)}>
