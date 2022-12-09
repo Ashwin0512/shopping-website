@@ -25,8 +25,8 @@ export default function SideBar_admin(props) {
                 <li><Link to='/admin/generateReport' className='sidelink' style={{textDecoration: 'none', color:'black'}}>Generate Report</Link></li>
                 <li><Link to='/admin/viewItems' className='sidelink' style={{textDecoration: 'none', color:'black'}}>View Products</Link></li>
                 <li><Link to='/admin/addItems' className='sidelink' style={{textDecoration: 'none', color:'black'}}>Add Product</Link></li>
-                <li><Link to='/admin/addManager' className='sidelink' style={{textDecoration: 'none', color:'black'}}>Add Manager</Link></li>
-                <li><Link to='/admin/viewManagers' className='sidelink' style={{textDecoration: 'none', color:'black'}}>View Managers</Link></li>
+                <li><Link to='/admin/manager/add' className='sidelink' style={{textDecoration: 'none', color:'black'}}>Add Manager</Link></li>
+                <li><Link to='/admin/managers/view' className='sidelink' style={{textDecoration: 'none', color:'black'}}>View Managers</Link></li>
                 {/* <li><Link className='sidelink' style={{textDecoration: 'none', color:'black'}}>Add Category</Link></li> */}
                 {/* <li><Link className='sidelink' style={{textDecoration: 'none', color:'black'}}>Add Item</Link></li> */}
                 {/* <li><Link className='sidelink' style={{textDecoration: 'none', color:'black'}}>Update Item</Link></li> */}

@@ -25,6 +25,8 @@ import ViewCategories from "./pages/ViewCategories";
 import Wallet from "./pages/Wallet";
 import Orders from "./pages/Orders";
 import UpdateProduct from "./pages/UpdateProduct";
+import ViewManagers from "./pages/ViewManagers";
+import AddManager from "./pages/AddManager";
 
 const App = () => {
 
@@ -91,6 +93,8 @@ const App = () => {
               <Route path="addItems" element={<AddProduct />} />
               <Route path="manageUsers" element={<ManageUsers />} />
               <Route path='product/edit' element={<UpdateProduct/>}/>
+              <Route path='manager/add' element={<AddManager />}/>
+              <Route path='managers/view' element={<ViewManagers />}/>
             </Route>
           {/* } */}
           
