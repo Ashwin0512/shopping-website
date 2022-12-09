@@ -41,6 +41,7 @@ public class OrderController {
         return orderRepository.findOrdersByDate(date);
     }
     @PostMapping("/user/{id}/placeOrder")
+    @CrossOrigin(origins = "http://localhost:3000")
     Order newOrder(@RequestBody Order newOrder) {
         return orderRepository.save(newOrder);
         //deduct money from user wallet balance

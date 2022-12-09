@@ -248,7 +248,7 @@ const Cart = (props) => {
     }
   }
 
-  const updateOrders = (user_id,user_name) => {
+  const updateOrders = async (user_id,user_name) => {
     for(let i=0; i<arr.length;i++){
       setOrder({
         order_date: new Date(),
@@ -258,10 +258,11 @@ const Cart = (props) => {
         StockOrdered : arr[i].quantity,
         total_amount: Tamount+350,
         order_expected: "14 Dec, 2022"
-      })
-      axios.post(`http://localhost:8080/user/${user_id}/placeOrder`, order)
-      
+      })      
+      await axios.post(`http://localhost:8080/user/${user_id}/placeOrder`,order )
     }
+    localStorage.removeItem('cartItems')
+    navigate('/home')
   }
 
   const finalCheckout = () => {
@@ -273,7 +274,7 @@ const Cart = (props) => {
       updateOrders(user.user_id, user.user_name);
       alert(`Updated wallet balance: ${balance}`)
     }else{
-      alert(`${user.user_name} doesnot have enough balance.`)
+      alert(`${user.user_name} doesnot have enough balance. Your Order is Placed`)
     }
   }
 

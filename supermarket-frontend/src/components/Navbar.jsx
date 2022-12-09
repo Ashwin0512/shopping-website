@@ -80,7 +80,7 @@ const Navbar = (props) => {
         </Left>
         <Center>
           <Link to='/' style={{textDecoration:'none', color:'#000'}}>
-            <Logo>BITSMALL</Logo>
+            <Logo>OOPS</Logo>
           </Link>
         </Center>
         <Right>
