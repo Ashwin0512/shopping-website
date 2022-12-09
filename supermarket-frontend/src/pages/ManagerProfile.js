@@ -10,11 +10,11 @@ import Navbar from '../components/Navbar';
 
 export default function ManagerProfile(props) {
   
-  console.log(props.adminId)
+  console.log(props.managerId)
 
   let navigate = useNavigate();
 
-  const [userData, setUserData] = useState({
+  const [manager, setManager] = useState({
     manager_name : "",
     manager_password: '',
     manager_address: "",
@@ -23,8 +23,8 @@ export default function ManagerProfile(props) {
   })
   
   const onInputChange = (e) => {
-    setUserData({
-      ...userData,
+    setManager({
+      ...manager,
       [e.target.name]: e.target.value,
     });
   };
@@ -34,15 +34,15 @@ export default function ManagerProfile(props) {
   
 
   const getManagerData = async (e) => {
-    const res =  await axios.get("http://localhost:8080/manager/7cab2c80-335b-4bf5-ab50-75be0339dd18")
+    const res =  await axios.get(`http://localhost:8080/manager/${props.managerId}`)
     console.log(res.data)
-    setUserData(res.data)
+    setManager(res.data)
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // await axios.post("http://localhost:8080/product", product);
-    await axios.put("http://localhost:8080/manager/7cab2c80-335b-4bf5-ab50-75be0339dd18", userData )
+    await axios.put(`http://localhost:8080/manager/${props.managerId}`, manager )
     navigate("../home");
   };
 
@@ -65,7 +65,7 @@ export default function ManagerProfile(props) {
                     style={{width:'30vw'}} 
                     type='text'
                     // value={product_name}
-                    defaultValue={userData.manager_name}
+                    defaultValue={manager.manager_name}
                     name='manager_name'
                     onChange={(e) => onInputChange(e)}
                     // placeholder='Enter product name
@@ -76,10 +76,11 @@ export default function ManagerProfile(props) {
                     style={{width:'30vw'}} 
                     type='text'
                     // value={desc}
-                    defaultValue={userData.manager_email}
+                    defaultValue={manager.manager_email}
                     name='manager_email'
                     onChange={(e) => onInputChange(e)}
                     // placeholder='Enter product description'
+                    readOnly
 
                 />
 
@@ -88,7 +89,7 @@ export default function ManagerProfile(props) {
                     style={{width:'30vw'}} 
                     type='text'
                     // value={discount}
-                    defaultValue={userData.manager_address}
+                    defaultValue={manager.manager_address}
                     name='manager_address'
                     onChange={(e) => onInputChange(e)}
                     // placeholder='Enter product discount'
@@ -100,7 +101,7 @@ export default function ManagerProfile(props) {
                     style={{width:'30vw'}} 
                     type='number'
                     // value={product_url}
-                    defaultValue={userData.manager_phone}
+                    defaultValue={manager.manager_phone}
                     name='manager_phone'
                     onChange={(e) => onInputChange(e)}
                     // placeholder='Enter the url for product image'
@@ -112,7 +113,7 @@ export default function ManagerProfile(props) {
                     style={{width:'30vw'}} 
                     type='password'
                     // value={days_to_deliver
-                    defaultValue={userData.manager_password}
+                    defaultValue={manager.manager_password}
                     name='manager_password'
                     onChange={(e) => onInputChange(e)}
                     // placeholder='Enter the number of days for delivery'

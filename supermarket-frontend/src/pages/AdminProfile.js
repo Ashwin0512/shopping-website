@@ -11,12 +11,12 @@ export default function AdminProfile(props) {
   let navigate = useNavigate();
   
     const [admin, setAdmin] = useState({
-        "admin_id": "",
-        "admin_name": "",
-        "admin_password": "",
-        "admin_address": "",
-        "admin_phone": "",
-        "admin_email": ""
+        admin_id: "",
+        admin_name: "",
+        admin_password: "",
+        admin_address: "",
+        admin_phone: "",
+        admin_email: ""
       })
   useEffect(() => {
     getAdminUser();
@@ -30,14 +30,14 @@ export default function AdminProfile(props) {
   };
 
   const getAdminUser = async(e) => {
-    const res = await axios.get("http://localhost:8080/admin/31323334-0000-0000-0000-000000000000")
+    const res = await axios.get(`http://localhost:8080/admin/${props.adminId}`)
     console.log(res.data)
     setAdmin(res.data)
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.put("http://localhost:8080/admin/31323334-0000-0000-0000-000000000000", admin);
+    await axios.put(`http://localhost:8080/admin/${props.adminId}`, admin);
     navigate("../home");
   };
 
@@ -74,6 +74,7 @@ export default function AdminProfile(props) {
                     defaultValue={admin.admin_email}
                     name='admin_email'
                     onChange={(e) => onInputChange(e)}
+                    readOnly
                     // placeholder='Enter product description'
 
                 />

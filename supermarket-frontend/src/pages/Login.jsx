@@ -96,8 +96,8 @@ const Login = (props) => {
 
   const handleManagerLogin = async (e) => {
     e.preventDefault()
-    const res = await axios.get(`http://localhost:8080/admin/byEmail/${userCreds.email}`)
-    props.setManagerId(res.data.user_id)
+    const res = await axios.get(`http://localhost:8080/manager/byEmail/${userCreds.email}`)
+    props.setManagerId(res.data.manager_id)
     await axios.post(`http://localhost:8080/manager/login` , userCreds)
     .then(res => {
       if(res.data) {
@@ -113,7 +113,7 @@ const Login = (props) => {
   const handleAdminLogin = async (e) => {
     e.preventDefault()
     const res = await axios.get(`http://localhost:8080/admin/byEmail/${userCreds.email}`)
-    props.setAdminId(res.data.user_id)
+    props.setAdminId(res.data.admin_id)
     await axios.post(`http://localhost:8080/admin/login` , userCreds)
     .then(res => {
       if(res.data) {
