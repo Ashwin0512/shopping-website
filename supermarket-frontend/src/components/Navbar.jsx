@@ -82,6 +82,7 @@ const Navbar = (props) => {
           <Link to='/home' style={{textDecoration:'none', color:'#000'}}>
             <Logo>BITSMALL</Logo>
           </Link>
+
         </Center>
         <Right>
           <Link to='/products'>
