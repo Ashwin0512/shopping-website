@@ -70,7 +70,7 @@ const App = () => {
             <Route path='/orders' element={<Orders />} />
             <Route path='/wallet' element={<Wallet userId={userId}/>} />
             </>
-          {/* } */}
+          {/* }  */}
           
 
           {/* {isManagerLoggedIn &&  */}
@@ -83,7 +83,7 @@ const App = () => {
               <Route path='login' element={<ManagerLogin />}/>
               <Route path='product/edit' element={<UpdateProduct/>}/>
             </Route>
-          {/* } */}
+          {/* }  */}
 
           {/* {  isAdminLoggedIn &&  */}
             <Route path="admin">

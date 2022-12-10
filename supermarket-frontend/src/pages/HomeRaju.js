@@ -34,7 +34,7 @@ export default function HomeRaju(props) {
                   )
                 })
               }
-              <Link to="./products" style={{textDecoration:'none'}}>
+              <Link to="../products" style={{textDecoration:'none'}}>
                   <Card type="All Products" />
               </Link>
             </div>

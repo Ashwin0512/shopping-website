@@ -79,7 +79,7 @@ const Navbar = (props) => {
           </SearchContainer>
         </Left>
         <Center>
-          <Link to='/' style={{textDecoration:'none', color:'#000'}}>
+          <Link to='/home' style={{textDecoration:'none', color:'#000'}}>
             <Logo>BITSMALL</Logo>
           </Link>
         </Center>
