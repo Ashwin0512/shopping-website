@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { mobile } from "../responsive";
-// var bcrypt = require('bcryptjs');
+var bcrypt = require('bcryptjs');
 
 const Container = styled.div`
   width: 100vw;
@@ -60,6 +60,9 @@ const Button = styled.button`
 
 const Register = () => {
 
+  var salt = bcrypt.genSaltSync(10);
+  var hash = bcrypt.hashSync("B4c0/\/", salt);
+
   let navigate = useNavigate()
 
   const [user, setUser] = useState({
@@ -84,8 +87,13 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8080/add/user", user)
-    navigate("/")
+    if(user.user_password === user.user_cnf_password) {
+      await axios.post("http://localhost:8080/add/user", user)
+      console.log(hash)
+      navigate("/")
+    } else {
+      alert("Passwords do not match")
+    }
   }
 
   return (

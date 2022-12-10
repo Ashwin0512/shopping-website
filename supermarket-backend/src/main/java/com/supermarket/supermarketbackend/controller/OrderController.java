@@ -43,6 +43,7 @@ public class OrderController {
     @PostMapping("/user/{id}/placeOrder")
     @CrossOrigin(origins = "http://localhost:3000")
     Order newOrder(@RequestBody Order newOrder) {
+
         return orderRepository.save(newOrder);
         //deduct money from user wallet balance
         //alert dedena...
